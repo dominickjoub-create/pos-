@@ -1,13 +1,15 @@
 /* =========================================================
    NUNUS BARBER SHOP — progressive enhancement layer
    Core content works with NO JS. Everything here is additive:
-   nav, carousels, lightbox, live-status, booking, and a lazy
-   Three.js barber pole. Guarded so nothing throws on failure.
+   nav, carousels, lightbox, live-status, booking, hero parallax,
+   and a lazy Three.js chrome scissors accent (off to the side,
+   never behind the headline). Guarded so nothing throws.
    ========================================================= */
 (function () {
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(pointer:fine)").matches;
   var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
 
@@ -17,9 +19,7 @@
 
   /* ---------- Sticky / condensing nav ---------- */
   var nav = $("#nav");
-  var onScroll = function () {
-    if (nav) nav.classList.toggle("is-condensed", window.scrollY > 40);
-  };
+  function onScroll() { if (nav) nav.classList.toggle("is-condensed", window.scrollY > 40); }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
@@ -38,9 +38,22 @@
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
     $$("a", navLinks).forEach(function (a) { a.addEventListener("click", closeMenu); });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeMenu();
-    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+  }
+
+  /* ---------- Hero parallax depth (subtle, GPU-light) ---------- */
+  var heroImg = $("#heroImg");
+  if (heroImg && !reduceMotion) {
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = Math.min(window.scrollY, window.innerHeight);
+        heroImg.style.transform = "translate3d(0," + (y * 0.18).toFixed(1) + "px,0) scale(1.06)";
+        ticking = false;
+      });
+    }, { passive: true });
   }
 
   /* ---------- Scroll reveal ---------- */
@@ -57,7 +70,7 @@
   }
 
   /* ---------- Magnetic buttons (pointer devices only) ---------- */
-  if (!reduceMotion && window.matchMedia("(pointer:fine)").matches) {
+  if (!reduceMotion && finePointer) {
     $$(".magnetic").forEach(function (el) {
       el.addEventListener("mousemove", function (e) {
         var r = el.getBoundingClientRect();
@@ -69,15 +82,15 @@
     });
   }
 
-  /* ---------- Subtle 3D tilt on cards/images ---------- */
-  if (!reduceMotion && window.matchMedia("(pointer:fine)").matches) {
+  /* ---------- Soft 3D tilt on cards/images ---------- */
+  if (!reduceMotion && finePointer) {
     $$(".tilt").forEach(function (el) {
       el.style.transformStyle = "preserve-3d";
       el.addEventListener("mousemove", function (e) {
         var r = el.getBoundingClientRect();
         var px = (e.clientX - r.left) / r.width - 0.5;
         var py = (e.clientY - r.top) / r.height - 0.5;
-        el.style.transform = "perspective(700px) rotateY(" + (px * 7).toFixed(2) + "deg) rotateX(" + (-py * 7).toFixed(2) + "deg)";
+        el.style.transform = "perspective(700px) rotateY(" + (px * 6).toFixed(2) + "deg) rotateX(" + (-py * 6).toFixed(2) + "deg)";
       });
       el.addEventListener("mouseleave", function () { el.style.transform = ""; });
     });
@@ -95,8 +108,7 @@
 
     root.classList.add("is-enhanced");
     var perView = opts.perView ? opts.perView() : 1;
-    var index = 0;
-    var timer = null;
+    var index = 0, timer = null;
 
     function pages() { return Math.max(1, Math.ceil(slides.length / perView)); }
 
@@ -128,7 +140,6 @@
       }
       if (user) restart();
     }
-
     function next() { go(index + perView, false); }
     function prev() { go(index - perView, false); }
 
@@ -139,23 +150,15 @@
       });
     });
 
-    /* autoplay with pause on hover/focus */
-    function start() {
-      if (!opts.autoplay || reduceMotion) return;
-      stop();
-      timer = setInterval(next, opts.interval || 5000);
-    }
+    function start() { if (!opts.autoplay || reduceMotion) return; stop(); timer = setInterval(next, opts.interval || 5000); }
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
     function restart() { stop(); start(); }
     root.addEventListener("mouseenter", stop);
     root.addEventListener("mouseleave", start);
     root.addEventListener("focusin", stop);
     root.addEventListener("focusout", start);
-    document.addEventListener("visibilitychange", function () {
-      document.hidden ? stop() : start();
-    });
+    document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
 
-    /* touch swipe */
     var sx = 0, dx = 0, dragging = false;
     viewport.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; dragging = true; stop(); }, { passive: true });
     viewport.addEventListener("touchmove", function (e) { if (dragging) dx = e.touches[0].clientX - sx; }, { passive: true });
@@ -169,13 +172,9 @@
 
     build();
     start();
-    return { next: next, prev: prev, go: go };
   }
 
-  var galleryPerView = function () {
-    var w = window.innerWidth;
-    return w < 620 ? 1 : w < 900 ? 2 : 3;
-  };
+  var galleryPerView = function () { var w = window.innerWidth; return w < 620 ? 1 : w < 900 ? 2 : 3; };
   makeCarousel($("#galleryCarousel"), { autoplay: true, interval: 4500, perView: galleryPerView });
   makeCarousel($("#reviewsCarousel"), { autoplay: true, interval: 6000, perView: function () { return 1; } });
 
@@ -186,15 +185,12 @@
     var img = $("#lightboxImg");
     var closeBtn = $("#lightboxClose");
     var btns = $$("#galleryTrack .gallery__btn");
-    var current = 0;
-    var lastFocus = null;
+    var current = 0, lastFocus = null;
 
     function open(i) {
       current = (i + btns.length) % btns.length;
-      var src = btns[current].getAttribute("data-full");
       var inner = btns[current].querySelector("img");
-      // skip placeholders that have no real image
-      img.src = src;
+      img.src = btns[current].getAttribute("data-full");
       img.alt = inner ? inner.alt : "Gallery image";
       lastFocus = document.activeElement;
       lb.hidden = false;
@@ -222,7 +218,7 @@
     });
   })();
 
-  /* ---------- Live open/closed status (Africa/Johannesburg) ---------- */
+  /* ---------- Live open/closed status (Africa/Johannesburg, 24-hour HH:MM) ---------- */
   (function () {
     var wrap = $("#liveStatus");
     var textEl = $("#liveStatusText");
@@ -230,14 +226,13 @@
 
     // Opening hours in minutes-from-midnight, keyed by JS day (0=Sun)
     var HOURS = {
-      1: [540, 1080], 2: [540, 1080], 3: [540, 1080], 4: [540, 1080], 5: [540, 1080], // Mon–Fri 9–18
-      6: [480, 930],  // Sat 8:00–15:30
-      0: [540, 840]   // Sun 9:00–14:00
+      1: [540, 1080], 2: [540, 1080], 3: [540, 1080], 4: [540, 1080], 5: [540, 1080], // Mon–Fri 09:00–18:00
+      6: [480, 930],  // Sat 08:00–15:30
+      0: [540, 840]   // Sun 09:00–14:00
     };
     var DAYNAME = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     function nowInJoburg() {
-      // Convert current time to Africa/Johannesburg (UTC+2, no DST) reliably.
       try {
         var parts = new Intl.DateTimeFormat("en-GB", {
           timeZone: "Africa/Johannesburg", weekday: "short",
@@ -246,20 +241,21 @@
         var map = {};
         parts.forEach(function (p) { map[p.type] = p.value; });
         var wdIndex = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(map.weekday);
-        return { day: wdIndex, mins: parseInt(map.hour, 10) * 60 + parseInt(map.minute, 10) };
+        var hh = parseInt(map.hour, 10) % 24; // Intl may emit "24" at midnight
+        return { day: wdIndex, mins: hh * 60 + parseInt(map.minute, 10) };
       } catch (e) {
-        // Fallback: assume SAST = UTC+2
         var d = new Date();
-        var utc = d.getUTCHours() * 60 + d.getUTCMinutes() + 120;
+        var utc = d.getUTCHours() * 60 + d.getUTCMinutes() + 120; // SAST = UTC+2
         var day = d.getUTCDay();
         if (utc >= 1440) { utc -= 1440; day = (day + 1) % 7; }
         return { day: day, mins: utc };
       }
     }
 
+    // 24-hour "hundred" format: always HH:MM, e.g. 18:00, 08:00, 15:30
     function fmt(mins) {
       var h = Math.floor(mins / 60), m = mins % 60;
-      return h + (m ? ":" + (m < 10 ? "0" + m : m) : "") ;
+      return (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m);
     }
 
     function nextOpenDay(fromDay) {
@@ -290,14 +286,13 @@
       wrap.classList.toggle("is-closed", !open);
       textEl.textContent = msg;
 
-      // Highlight today's row
       $$("#hoursTable tr").forEach(function (tr) {
         tr.classList.toggle("is-today", parseInt(tr.getAttribute("data-day"), 10) === t.day);
       });
     }
 
     update();
-    setInterval(update, 60000); // refresh every minute
+    setInterval(update, 60000);
   })();
 
   /* ---------- Booking form -> pre-filled WhatsApp ---------- */
@@ -310,7 +305,6 @@
       var phone = ($("#bkPhone").value || "").trim();
       var service = $("#bkService").value;
       var time = ($("#bkTime").value || "").trim();
-
       if (!name) { $("#bkName").focus(); return; }
 
       var lines = [
@@ -321,31 +315,27 @@
         time ? "Preferred time: " + time : ""
       ].filter(Boolean);
 
-      var url = "https://wa.me/27746151005?text=" + encodeURIComponent(lines.join("\n"));
-      window.open(url, "_blank", "noopener");
+      window.open("https://wa.me/27746151005?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
     });
   })();
 
-  /* ---------- Lazy-load Three.js barber pole (never blocks paint) ---------- */
+  /* ---------- Lazy Three.js chrome scissors accent (off to the side) ---------- */
   (function () {
-    var stage = $("#heroStage");
-    var fallback = $("#poleFallback");
+    var stage = $("#scissors3d");
     if (!stage || reduceMotion) return;
 
-    // Feature-detect WebGL first — keep the CSS pole if unavailable.
     function hasWebGL() {
       try {
         var c = document.createElement("canvas");
         return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl")));
       } catch (e) { return false; }
     }
-    if (!hasWebGL()) return;
+    if (!hasWebGL()) return; // CSS ✂ glyph fallback stays
 
     function loadThree() {
       return new Promise(function (resolve, reject) {
         if (window.THREE) return resolve(window.THREE);
         var s = document.createElement("script");
-        // Lazy CDN load; keep as a classic script so no build step is needed.
         s.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
         s.async = true;
         s.onload = function () { window.THREE ? resolve(window.THREE) : reject(); };
@@ -354,148 +344,76 @@
       });
     }
 
-    // Only bother once the hero is/near viewport (it is, at load, but keep idle-friendly)
-    var kickoff = function () {
-      loadThree().then(initPole).catch(function () {
-        /* CDN blocked/offline → CSS fallback stays. Silent by design. */
-      });
-    };
-    if ("requestIdleCallback" in window) requestIdleCallback(kickoff, { timeout: 2500 });
-    else setTimeout(kickoff, 1200);
+    // Only build once the accent scrolls near view (never blocks first paint)
+    function whenVisible(cb) {
+      if (!("IntersectionObserver" in window)) return cb();
+      var ob = new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { ob.disconnect(); cb(); }
+      }, { rootMargin: "200px" });
+      ob.observe(stage);
+    }
 
-    function initPole(THREE) {
-      var w = stage.clientWidth, h = stage.clientHeight;
+    whenVisible(function () {
+      loadThree().then(initScissors).catch(function () { /* CDN blocked → CSS glyph stays */ });
+    });
+
+    function initScissors(THREE) {
+      var size = stage.clientWidth || 120;
       var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(38, w / h, 0.1, 100);
-      camera.position.set(0, 0, 9);
+      var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+      camera.position.set(0, 0, 8);
 
       var renderer;
-      try {
-        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      } catch (e) { return; }
+      try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); }
+      catch (e) { return; }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
-      renderer.setSize(w, h);
+      renderer.setSize(size, size);
       stage.appendChild(renderer.domElement);
+      stage.classList.add("is-live"); // hide CSS glyph
 
-      // Hide CSS fallback now that WebGL is live
-      if (fallback) fallback.classList.add("is-hidden");
-
+      var chrome = new THREE.MeshStandardMaterial({ color: 0xdfe2e6, roughness: 0.18, metalness: 1 });
       var group = new THREE.Group();
       scene.add(group);
 
-      // ---- Glass cylinder with a helical red/white/blue stripe texture ----
-      var tex = makeStripeTexture();
-      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-      tex.repeat.set(1, 1);
-      var poleMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.35, metalness: 0.1 });
-      var poleGeo = new THREE.CylinderGeometry(1.05, 1.05, 5.4, 48, 1, true);
-      var pole = new THREE.Mesh(poleGeo, poleMat);
-      group.add(pole);
-
-      // Glass shell
-      var glassMat = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff, transparent: true, opacity: 0.12,
-        roughness: 0.05, metalness: 0, clearcoat: 1
-      });
-      var glass = new THREE.Mesh(new THREE.CylinderGeometry(1.16, 1.16, 5.4, 48, 1, true), glassMat);
-      group.add(glass);
-
-      // Chrome caps
-      var chrome = new THREE.MeshStandardMaterial({ color: 0xdfe3e8, roughness: 0.18, metalness: 1 });
-      function cap(y) {
-        var c = new THREE.Group();
-        var body = new THREE.Mesh(new THREE.CylinderGeometry(1.28, 1.28, 0.5, 48), chrome);
-        var ring = new THREE.Mesh(new THREE.TorusGeometry(1.24, 0.12, 16, 48), chrome);
-        ring.rotation.x = Math.PI / 2;
-        c.add(body); c.add(ring);
-        var tip = new THREE.Mesh(new THREE.SphereGeometry(0.34, 24, 24), chrome);
-        tip.position.y = y > 0 ? 0.42 : -0.42;
-        c.add(tip);
-        c.position.y = y;
-        return c;
+      // Build one scissor blade+handle, then mirror it → crossed scissors
+      function blade() {
+        var g = new THREE.Group();
+        var b = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.14, 3.2, 12), chrome);
+        b.position.y = 1.1;
+        var ring = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.1, 12, 28), chrome);
+        ring.position.y = -0.9;
+        g.add(b); g.add(ring);
+        return g;
       }
-      group.add(cap(2.95));
-      group.add(cap(-2.95));
+      var left = blade();  left.rotation.z = 0.28;
+      var right = blade(); right.rotation.z = -0.28; right.scale.x = -1;
+      group.add(left); group.add(right);
+      // pivot pin
+      group.add(new THREE.Mesh(new THREE.SphereGeometry(0.16, 16, 16), chrome));
+      group.rotation.x = 0.3;
 
-      // ---- Lighting ----
-      scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-      var key = new THREE.DirectionalLight(0xfff2d6, 1.1); key.position.set(4, 6, 6); scene.add(key);
-      var rim = new THREE.DirectionalLight(0xd4af37, 0.8); rim.position.set(-5, 2, -4); scene.add(rim);
-      var brick = new THREE.PointLight(0xb04a37, 0.5, 30); brick.position.set(-3, -2, 4); scene.add(brick);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+      var key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(4, 6, 6); scene.add(key);
+      var gold = new THREE.DirectionalLight(0xc9a24b, 0.7); gold.position.set(-5, -2, 3); scene.add(gold);
 
-      group.rotation.z = 0.12;
-
-      // ---- Interaction: gentle cursor / gyro tilt ----
-      var targetX = 0, targetY = 0;
-      window.addEventListener("mousemove", function (e) {
-        targetX = (e.clientX / window.innerWidth - 0.5) * 0.5;
-        targetY = (e.clientY / window.innerHeight - 0.5) * 0.35;
-      }, { passive: true });
-      if (window.DeviceOrientationEvent) {
-        window.addEventListener("deviceorientation", function (e) {
-          if (e.gamma == null) return;
-          targetX = Math.max(-0.6, Math.min(0.6, (e.gamma || 0) / 60));
-          targetY = Math.max(-0.4, Math.min(0.4, (e.beta || 0) / 120));
-        }, { passive: true });
-      }
-
-      // ---- Animate, frame-rate capped for mid phones ----
-      var last = 0, fps = 32, interval = 1000 / fps, t0 = performance.now();
-      var running = true;
-      // Pause when hero off-screen
-      if ("IntersectionObserver" in window) {
-        new IntersectionObserver(function (en) { running = en[0].isIntersecting; })
-          .observe(stage);
-      }
-
-      function resize() {
-        w = stage.clientWidth; h = stage.clientHeight;
-        camera.aspect = w / h; camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-      }
-      window.addEventListener("resize", resize);
+      var last = 0, interval = 1000 / 30, t0 = performance.now(), running = true;
+      new IntersectionObserver(function (en) { running = en[0].isIntersecting; }).observe(stage);
 
       function loop(now) {
         requestAnimationFrame(loop);
-        if (!running) return;
-        if (now - last < interval) return;
+        if (!running || now - last < interval) return;
         last = now;
         var t = (now - t0) / 1000;
-        tex.offset.y = (t * 0.35) % 1;                 // helix scroll
-        group.rotation.y += (targetX - group.rotation.y) * 0.05 + 0.006;
-        group.rotation.x += (targetY - group.rotation.x) * 0.05;
-        group.position.y = Math.sin(t * 0.9) * 0.12;   // float
+        group.rotation.z = t * 0.4;                 // slow rotate
+        group.position.y = Math.sin(t * 1.1) * 0.15; // gentle float
         renderer.render(scene, camera);
       }
       requestAnimationFrame(loop);
-    }
 
-    // Canvas-drawn diagonal barber stripes → texture
-    function makeStripeTexture() {
-      var c = document.createElement("canvas");
-      c.width = 128; c.height = 512;
-      var g = c.getContext("2d");
-      var stripe = 44, colors = ["#c0392b", "#ffffff", "#1f4e8f", "#ffffff"];
-      g.save();
-      g.translate(0, 0);
-      // draw slanted bands by shearing
-      for (var y = -stripe * 4; y < c.height + stripe * 4; y += stripe) {
-        var ci = Math.floor((y / stripe)) % colors.length;
-        if (ci < 0) ci += colors.length;
-        g.fillStyle = colors[ci];
-        g.beginPath();
-        g.moveTo(0, y);
-        g.lineTo(c.width, y - 60);
-        g.lineTo(c.width, y - 60 + stripe);
-        g.lineTo(0, y + stripe);
-        g.closePath();
-        g.fill();
-      }
-      g.restore();
-      var THREE = window.THREE;
-      var tex = new THREE.CanvasTexture(c);
-      tex.anisotropy = 4;
-      return tex;
+      window.addEventListener("resize", function () {
+        var s = stage.clientWidth || 120;
+        renderer.setSize(s, s);
+      });
     }
   })();
 

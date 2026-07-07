@@ -3,11 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0c0a09" />
+  <meta name="theme-color" content="#0b0b0c" />
+
+  <!--
+  =====================================================================
+  NUNUS BARBER SHOP — image manifest
+  Drop your photos into the /images folder using EXACTLY these names.
+  Everything shows a styled placeholder until the real file exists.
+  ---------------------------------------------------------------------
+    images/hero.jpg         → big hero background photo   (~1600×1000, landscape)
+    images/interior-1.jpg   → About section photo         (~640×760, portrait)
+    images/cut-1.jpg        → Gallery photo 1             (~600×750, portrait)
+    images/cut-2.jpg        → Gallery photo 2
+    images/cut-3.jpg        → Gallery photo 3
+    images/cut-4.jpg        → Gallery photo 4
+    images/cut-5.jpg        → Gallery photo 5
+    images/interior-2.jpg   → Gallery photo 6 (shop interior)
+    images/og-cover.jpg     → social share image          (1200×630)
+  =====================================================================
+  -->
 
   <!-- ===================== SEO ===================== -->
   <title>Nunus Barber Shop — Premium Barbering in Krugersdorp</title>
-  <meta name="description" content="Nunus Barber Shop in Krugersdorp North — old-school craft, modern finish. Skin fades, hot towel shaves, beard shaping by Hemza. 4.8★ from 25 Google reviews. Book on WhatsApp." />
+  <meta name="description" content="Nunus Barber Shop in Krugersdorp North — old-school craft, modern finish. Skin fades, hot towel shaves & beard shaping by Hemza. 4.8★ from 25 Google reviews. Book on WhatsApp." />
   <meta name="keywords" content="barber Krugersdorp, barbershop Krugersdorp North, skin fade, hot towel shave, beard trim, Nunus Barber, Hemza barber" />
   <link rel="canonical" href="https://nunusbarber.co.za/" />
 
@@ -17,16 +35,14 @@
   <meta property="og:description" content="Old-school craft. Modern finish. Skin fades, hot towel shaves & beard shaping by Hemza. 4.8★ · 25 reviews." />
   <meta property="og:url" content="https://nunusbarber.co.za/" />
   <meta property="og:site_name" content="Nunus Barber Shop" />
-  <!-- TODO: replace with a real 1200x630 social share image -->
-  <meta property="og:image" content="images/og-cover.jpg" />
+  <meta property="og:image" content="images/og-cover.jpg" /><!-- TODO: add images/og-cover.jpg (1200×630) -->
   <meta property="og:locale" content="en_ZA" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Nunus Barber Shop — Premium Barbering in Krugersdorp" />
   <meta name="twitter:description" content="Old-school craft. Modern finish. Book your cut with Hemza on WhatsApp." />
-  <!-- TODO: replace with a real 1200x630 social share image -->
-  <meta name="twitter:image" content="images/og-cover.jpg" />
+  <meta name="twitter:image" content="images/og-cover.jpg" /><!-- TODO: add images/og-cover.jpg (1200×630) -->
 
   <!-- ===================== FONTS ===================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -92,15 +108,11 @@
     <div class="nav__inner">
       <a href="#hero" class="nav__brand" aria-label="Nunus Barber Shop — home">
         <span class="nav__brand-mark" aria-hidden="true">
-          <!-- compact crossed razor + scissors -->
-          <svg viewBox="0 0 40 40" width="34" height="34" role="img" aria-label="Nunus Barber emblem">
+          <svg viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="Nunus Barber emblem">
             <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="27" r="3.4"/>
-              <circle cx="12" cy="13" r="3.4"/>
-              <path d="M14.6 25 32 10"/>
-              <path d="M14.6 15 32 30"/>
-              <circle cx="32" cy="10" r="1"/>
-              <circle cx="32" cy="30" r="1"/>
+              <circle cx="12" cy="27" r="3.4"/><circle cx="12" cy="13" r="3.4"/>
+              <path d="M14.6 25 32 10"/><path d="M14.6 15 32 30"/>
+              <circle cx="32" cy="10" r="1"/><circle cx="32" cy="30" r="1"/>
             </g>
           </svg>
         </span>
@@ -127,59 +139,53 @@
 
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="hero">
-      <!-- 3D canvas mounts here; static fallback sits underneath -->
-      <div class="hero__stage" id="heroStage" aria-hidden="true">
-        <!-- CSS fallback barber pole (always rendered; hidden once WebGL takes over) -->
-        <div class="pole" id="poleFallback">
-          <div class="pole__cap pole__cap--top"></div>
-          <div class="pole__glass"><div class="pole__helix"></div></div>
-          <div class="pole__cap pole__cap--bot"></div>
-        </div>
+      <!-- Hero background photo. Parallax is added by JS; static + legible without it. -->
+      <div class="hero__bg" aria-hidden="true">
+        <!-- TODO: drop images/hero.jpg (a wide shop / cut photo). Falls back to dark gradient. -->
+        <img id="heroImg" src="images/hero.jpg" alt="" loading="eager" onerror="this.style.display='none'" />
+        <div class="hero__scrim"></div>
       </div>
 
       <div class="hero__content">
-        <p class="hero__eyebrow">Krugersdorp North · Est. Heritage Square</p>
+        <p class="hero__eyebrow">Krugersdorp North · Heritage Square</p>
 
-        <!-- Wordmark logo: two gentlemen flanking cursive wordmark, razor + scissors -->
+        <!-- Wordmark: two bearded gentlemen flanking cursive "Nunus Barber", razor + scissors -->
         <div class="wordmark" role="img" aria-label="Nunus Barber Shop logo">
-          <svg class="wordmark__svg" viewBox="0 0 520 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#f7e7b8"/>
-                <stop offset="0.5" stop-color="#d4af37"/>
-                <stop offset="1" stop-color="#9c7c22"/>
-              </linearGradient>
-            </defs>
-            <g stroke="url(#gold)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="wordmark__svg" viewBox="0 0 560 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <!-- Left gentleman -->
-              <g transform="translate(70 100)">
-                <circle cx="0" cy="-26" r="20"/>
-                <path d="M-16 -18 q16 26 32 0"/>            <!-- beard -->
-                <path d="M-13 -34 q13 -12 26 0"/>           <!-- hair -->
-                <path d="M-8 -30 q8 6 16 0"/>               <!-- brow line -->
-                <circle cx="-6" cy="-26" r="1.4" fill="url(#gold)"/>
-                <circle cx="6" cy="-26" r="1.4" fill="url(#gold)"/>
-                <path d="M-20 6 q20 -14 40 0 l0 34 -40 0 z"/> <!-- collar/shoulders -->
-                <path d="M0 6 l0 34"/>
+              <g transform="translate(70 78)">
+                <path d="M-20 -30 q20 -16 40 0"/>                 <!-- hair -->
+                <path d="M-21 -28 q-3 20 6 34 q15 22 30 0 q9 -14 6 -34"/> <!-- head + beard outline -->
+                <path d="M-14 -14 q14 -8 28 0"/>                  <!-- brow -->
+                <circle cx="-7" cy="-10" r="1.5" fill="currentColor"/>
+                <circle cx="7" cy="-10" r="1.5" fill="currentColor"/>
+                <path d="M-6 0 q6 5 12 0"/>                       <!-- moustache -->
+                <path d="M-10 8 q10 10 20 0"/>                    <!-- beard lines -->
+                <path d="M-8 16 q8 8 16 0"/>
+              </g>
+              <!-- razor + scissors, left of wordmark -->
+              <g transform="translate(150 78)" stroke-width="1.7">
+                <circle cx="-6" cy="8" r="3.2"/><circle cx="-6" cy="-6" r="3.2"/>
+                <path d="M-3 7 L20 -6"/><path d="M-3 -5 L20 8"/>
+                <path d="M-20 -16 L6 -4 q4 2 1 6"/>
+              </g>
+              <!-- razor + scissors, right of wordmark (mirrored) -->
+              <g transform="translate(410 78) scale(-1 1)" stroke-width="1.7">
+                <circle cx="-6" cy="8" r="3.2"/><circle cx="-6" cy="-6" r="3.2"/>
+                <path d="M-3 7 L20 -6"/><path d="M-3 -5 L20 8"/>
+                <path d="M-20 -16 L6 -4 q4 2 1 6"/>
               </g>
               <!-- Right gentleman (mirrored) -->
-              <g transform="translate(450 100) scale(-1 1)">
-                <circle cx="0" cy="-26" r="20"/>
-                <path d="M-16 -18 q16 26 32 0"/>
-                <path d="M-13 -34 q13 -12 26 0"/>
-                <path d="M-8 -30 q8 6 16 0"/>
-                <circle cx="-6" cy="-26" r="1.4" fill="url(#gold)"/>
-                <circle cx="6" cy="-26" r="1.4" fill="url(#gold)"/>
-                <path d="M-20 6 q20 -14 40 0 l0 34 -40 0 z"/>
-                <path d="M0 6 l0 34"/>
-              </g>
-              <!-- Crossed razor + scissors above wordmark -->
-              <g transform="translate(260 44)">
-                <circle cx="-30" cy="10" r="4"/>
-                <circle cx="-30" cy="-6" r="4"/>
-                <path d="M-27 9 L14 -8"/>
-                <path d="M-27 -5 L14 8"/>
-                <path d="M-16 -18 L18 -2 q6 3 2 8"/>        <!-- razor -->
+              <g transform="translate(490 78) scale(-1 1)">
+                <path d="M-20 -30 q20 -16 40 0"/>
+                <path d="M-21 -28 q-3 20 6 34 q15 22 30 0 q9 -14 6 -34"/>
+                <path d="M-14 -14 q14 -8 28 0"/>
+                <circle cx="-7" cy="-10" r="1.5" fill="currentColor"/>
+                <circle cx="7" cy="-10" r="1.5" fill="currentColor"/>
+                <path d="M-6 0 q6 5 12 0"/>
+                <path d="M-10 8 q10 10 20 0"/>
+                <path d="M-8 16 q8 8 16 0"/>
               </g>
             </g>
           </svg>
@@ -196,7 +202,7 @@
         </div>
 
         <div class="hero__cta">
-          <a class="btn btn--gold magnetic" href="https://wa.me/27746151005" target="_blank" rel="noopener">
+          <a class="btn btn--solid magnetic" href="https://wa.me/27746151005" target="_blank" rel="noopener">
             <span aria-hidden="true">💬</span> Book on WhatsApp
           </a>
           <a class="btn btn--ghost magnetic" href="tel:+27746151005">
@@ -227,67 +233,63 @@
           </ul>
         </div>
         <div class="about__media">
-          <!-- TODO: replace with a real interior/portrait photo -->
-          <img class="tilt" src="images/about-hemza.jpg" alt="Hemza at work inside Nunus Barber Shop" loading="lazy" width="640" height="760"
-               onerror="this.classList.add('img--placeholder');this.alt='Photo coming soon';" />
+          <!-- TODO: drop images/interior-1.jpg (a portrait/interior shot). -->
+          <img class="tilt" src="images/interior-1.jpg" alt="Inside Nunus Barber Shop" loading="lazy" width="640" height="760"
+               onerror="this.classList.add('is-missing');this.alt='Photo coming soon';" />
           <div class="about__stat"><strong>25+</strong><span>years of trust</span></div>
         </div>
       </div>
     </section>
 
-    <div class="hairline" aria-hidden="true"></div>
+    <!-- ===================== 3D SCISSORS ACCENT BAND (between sections, never behind text) ===================== -->
+    <div class="accent-band" aria-hidden="true">
+      <div class="accent-band__line"></div>
+      <!-- WebGL chrome scissors mounts here; CSS glyph shows as fallback -->
+      <div class="accent3d" id="scissors3d"><span class="accent3d__glyph">✂</span></div>
+      <div class="accent-band__line"></div>
+    </div>
 
-    <!-- ===================== SERVICES ===================== -->
+    <!-- ===================== SERVICES (pricing only) ===================== -->
     <section class="section services reveal" id="services">
       <div class="section__head">
         <p class="section__eyebrow">The Menu</p>
         <h2 class="section__title">Services &amp; pricing</h2>
-        <p class="section__lead">Honest craft, fair prices. <!-- TODO: confirm real prices with the shop --></p>
+        <p class="section__lead">Honest craft, fair prices.</p>
       </div>
 
-      <!-- Grid on desktop, swipeable carousel on mobile (progressive) -->
-      <div class="services__track" id="servicesTrack">
-        <!-- TODO: update every "from R___" with the shop's real prices -->
+      <!-- Phone: 6 cards stacked vertically (NOT a carousel). Desktop: grid. -->
+      <div class="services__list">
+        <!-- TODO: replace every "from R___" with the shop's real price -->
         <article class="svc-card tilt">
-          <div class="svc-card__icon" aria-hidden="true">✂️</div>
-          <h3>Haircut</h3>
+          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">✂️</span><h3>Haircut</h3></div>
           <p>Classic scissor or clipper cut, styled and finished to your taste.</p>
           <span class="svc-card__price">from R___</span>
         </article>
         <article class="svc-card tilt">
-          <div class="svc-card__icon" aria-hidden="true">💈</div>
-          <h3>Skin Fade</h3>
+          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">💈</span><h3>Skin Fade</h3></div>
           <p>Seamless blend down to the skin — sharp lines, flawless gradient.</p>
           <span class="svc-card__price">from R___</span>
         </article>
         <article class="svc-card tilt">
-          <div class="svc-card__icon" aria-hidden="true">🧔</div>
-          <h3>Beard Trim &amp; Shape</h3>
+          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🧔</span><h3>Beard Trim &amp; Shape</h3></div>
           <p>Sculpted, lined and balanced to frame your face.</p>
           <span class="svc-card__price">from R___</span>
         </article>
         <article class="svc-card tilt">
-          <div class="svc-card__icon" aria-hidden="true">🪒</div>
-          <h3>Hot Towel Shave</h3>
+          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🪒</span><h3>Hot Towel Shave</h3></div>
           <p>Traditional straight-razor shave with hot towels and balm.</p>
           <span class="svc-card__price">from R___</span>
         </article>
         <article class="svc-card tilt svc-card--feature">
-          <div class="svc-card__icon" aria-hidden="true">⭐</div>
-          <h3>Cut + Beard Combo</h3>
+          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">⭐</span><h3>Cut + Beard Combo</h3></div>
           <p>The full reset — haircut paired with a shaped, conditioned beard.</p>
           <span class="svc-card__price">from R___</span>
         </article>
         <article class="svc-card tilt">
-          <div class="svc-card__icon" aria-hidden="true">🧒</div>
-          <h3>Kids Cut</h3>
+          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🧒</span><h3>Kids Cut</h3></div>
           <p>Patient, friendly cuts for the young gentlemen (and future regulars).</p>
           <span class="svc-card__price">from R___</span>
         </article>
-      </div>
-
-      <div class="services__note">
-        <a class="btn btn--gold magnetic" href="https://wa.me/27746151005" target="_blank" rel="noopener">Book your service</a>
       </div>
     </section>
 
@@ -304,21 +306,24 @@
       <div class="carousel" id="galleryCarousel">
         <div class="carousel__viewport">
           <ul class="carousel__track" id="galleryTrack">
-            <!-- TODO: drop real photos into /images with these names -->
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/gallery-1.jpg">
-              <img src="images/gallery-1.jpg" alt="Sharp skin fade finished at Nunus Barber" loading="lazy" width="600" height="700" onerror="this.parentElement.classList.add('img--placeholder')"/>
+            <!-- TODO: drop these files into /images -->
+            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-1.jpg">
+              <img src="images/cut-1.jpg" alt="Fresh fade at Nunus Barber" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
             </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/gallery-2.jpg">
-              <img src="images/gallery-2.jpg" alt="Classic scissor cut and styling" loading="lazy" width="600" height="700" onerror="this.parentElement.classList.add('img--placeholder')"/>
+            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-2.jpg">
+              <img src="images/cut-2.jpg" alt="Curly top with clean taper" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
             </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/gallery-3.jpg">
-              <img src="images/gallery-3.jpg" alt="Shaped and lined beard trim" loading="lazy" width="600" height="700" onerror="this.parentElement.classList.add('img--placeholder')"/>
+            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-3.jpg">
+              <img src="images/cut-3.jpg" alt="Classic scissor cut and styling" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
             </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/gallery-4.jpg">
-              <img src="images/gallery-4.jpg" alt="Warm brick and walnut shop interior" loading="lazy" width="600" height="700" onerror="this.parentElement.classList.add('img--placeholder')"/>
+            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-4.jpg">
+              <img src="images/cut-4.jpg" alt="Shaped and lined beard trim" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
             </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/gallery-5.jpg">
-              <img src="images/gallery-5.jpg" alt="Chrome barber chair detail" loading="lazy" width="600" height="700" onerror="this.parentElement.classList.add('img--placeholder')"/>
+            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-5.jpg">
+              <img src="images/cut-5.jpg" alt="Detailed line-up and finish" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
+            </button></li>
+            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/interior-2.jpg">
+              <img src="images/interior-2.jpg" alt="Exposed brick and walnut shop interior" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
             </button></li>
           </ul>
         </div>
@@ -379,23 +384,23 @@
       <div class="section__head">
         <p class="section__eyebrow">Opening Times</p>
         <h2 class="section__title">Hours</h2>
-        <!-- JS fills the live status; static fallback text shown if JS is off -->
+        <!-- JS fills the live status in 24-hour HH:00 format; static fallback if JS is off -->
         <p class="live-status" id="liveStatus" aria-live="polite">
           <span class="live-status__dot"></span>
-          <span id="liveStatusText">Mon–Fri 9–6 · Sat 8–3:30 · Sun 9–2</span>
+          <span id="liveStatusText">Mon–Fri 09:00–18:00 · Sat 08:00–15:30 · Sun 09:00–14:00</span>
         </p>
       </div>
 
       <table class="hours__table" id="hoursTable">
         <caption class="sr-only">Weekly opening hours for Nunus Barber Shop</caption>
         <tbody>
-          <tr data-day="1"><th scope="row">Monday</th><td>9:00 – 18:00</td></tr>
-          <tr data-day="2"><th scope="row">Tuesday</th><td>9:00 – 18:00</td></tr>
-          <tr data-day="3"><th scope="row">Wednesday</th><td>9:00 – 18:00</td></tr>
-          <tr data-day="4"><th scope="row">Thursday</th><td>9:00 – 18:00</td></tr>
-          <tr data-day="5"><th scope="row">Friday</th><td>9:00 – 18:00</td></tr>
-          <tr data-day="6"><th scope="row">Saturday</th><td>8:00 – 15:30</td></tr>
-          <tr data-day="0"><th scope="row">Sunday</th><td>9:00 – 14:00</td></tr>
+          <tr data-day="1"><th scope="row">Monday</th><td>09:00 – 18:00</td></tr>
+          <tr data-day="2"><th scope="row">Tuesday</th><td>09:00 – 18:00</td></tr>
+          <tr data-day="3"><th scope="row">Wednesday</th><td>09:00 – 18:00</td></tr>
+          <tr data-day="4"><th scope="row">Thursday</th><td>09:00 – 18:00</td></tr>
+          <tr data-day="5"><th scope="row">Friday</th><td>09:00 – 18:00</td></tr>
+          <tr data-day="6"><th scope="row">Saturday</th><td>08:00 – 15:30</td></tr>
+          <tr data-day="0"><th scope="row">Sunday</th><td>09:00 – 14:00</td></tr>
         </tbody>
       </table>
     </section>
@@ -413,7 +418,6 @@
         <!-- Left: map + NAP -->
         <div class="visit__map-col">
           <div class="visit__map">
-            <!-- Embedded Google Map by plus code / address -->
             <iframe
               title="Map to Nunus Barber Shop, Heritage Square, Cecil Knight St, Krugersdorp North"
               src="https://www.google.com/maps?q=WQ8H%2B7W+Krugersdorp+North&output=embed"
@@ -430,7 +434,7 @@
           <div class="visit__actions">
             <a class="btn btn--ghost magnetic" href="https://www.google.com/maps?q=WQ8H%2B7W+Krugersdorp+North" target="_blank" rel="noopener">Directions</a>
             <a class="btn btn--ghost magnetic" href="tel:+27746151005">Call</a>
-            <a class="btn btn--gold magnetic" href="https://wa.me/27746151005" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn btn--solid magnetic" href="https://wa.me/27746151005" target="_blank" rel="noopener">WhatsApp</a>
           </div>
         </div>
 
@@ -464,7 +468,7 @@
               <input type="text" name="time" id="bkTime" placeholder="e.g. Sat morning" />
             </label>
 
-            <button type="submit" class="btn btn--gold btn--block magnetic">Send on WhatsApp</button>
+            <button type="submit" class="btn btn--solid btn--block magnetic">Send on WhatsApp</button>
             <p class="booking__fallback">Prefer to call? <a href="tel:+27746151005">074 615 1005</a></p>
           </form>
         </div>
@@ -477,7 +481,7 @@
     <div class="footer__inner">
       <div class="footer__brand">
         <span class="footer__mark" aria-hidden="true">
-          <svg viewBox="0 0 40 40" width="40" height="40">
+          <svg viewBox="0 0 40 40" width="38" height="38">
             <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="27" r="3.4"/><circle cx="12" cy="13" r="3.4"/>
               <path d="M14.6 25 32 10"/><path d="M14.6 15 32 30"/>
@@ -490,9 +494,9 @@
 
       <div class="footer__col">
         <h4>Hours</h4>
-        <p>Mon–Fri 9:00–18:00</p>
-        <p>Sat 8:00–15:30</p>
-        <p>Sun 9:00–14:00</p>
+        <p>Mon–Fri 09:00–18:00</p>
+        <p>Sat 08:00–15:30</p>
+        <p>Sun 09:00–14:00</p>
       </div>
 
       <div class="footer__col">
