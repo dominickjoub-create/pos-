@@ -47,7 +47,7 @@
   <!-- ===================== FONTS ===================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Oswald:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 
@@ -144,6 +144,8 @@
         <!-- TODO: drop images/hero.jpg (a wide shop / cut photo). Falls back to dark gradient. -->
         <img id="heroImg" src="images/hero.jpg" alt="" loading="eager" onerror="this.style.display='none'" />
         <div class="hero__scrim"></div>
+        <!-- Signature halftone dot motif — gold on black, top-right, clear of the text -->
+        <div class="halftone halftone--hero"></div>
       </div>
 
       <div class="hero__content">
@@ -306,30 +308,47 @@
       <div class="carousel" id="galleryCarousel">
         <div class="carousel__viewport">
           <ul class="carousel__track" id="galleryTrack">
-            <!-- TODO: drop these files into /images -->
+            <!--
+              Real haircut photos live here. To add more, copy one <li> block,
+              bump the number (images/cut-3.jpg, cut-4.jpg …), drop the file in
+              /images, and update the alt text. Only haircut photos go here.
+            -->
             <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-1.jpg">
-              <img src="images/cut-1.jpg" alt="Fresh fade at Nunus Barber" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
+              <img src="images/cut-1.jpg" alt="Curly top with a clean taper fade at Nunus Barber" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
             </button></li>
             <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-2.jpg">
-              <img src="images/cut-2.jpg" alt="Curly top with clean taper" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
-            </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-3.jpg">
-              <img src="images/cut-3.jpg" alt="Classic scissor cut and styling" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
-            </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-4.jpg">
-              <img src="images/cut-4.jpg" alt="Shaped and lined beard trim" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
-            </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-5.jpg">
-              <img src="images/cut-5.jpg" alt="Detailed line-up and finish" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
-            </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/interior-2.jpg">
-              <img src="images/interior-2.jpg" alt="Exposed brick and walnut shop interior" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
+              <img src="images/cut-2.jpg" alt="Textured curls with a blended low fade" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
             </button></li>
           </ul>
         </div>
         <button class="carousel__arrow carousel__arrow--prev" data-dir="-1" aria-label="Previous image">‹</button>
         <button class="carousel__arrow carousel__arrow--next" data-dir="1" aria-label="Next image">›</button>
         <div class="carousel__dots" id="galleryDots" role="tablist" aria-label="Gallery navigation"></div>
+      </div>
+    </section>
+
+    <div class="hairline" aria-hidden="true"></div>
+
+    <!-- ===================== STATS BAND (big architectural metrics) ===================== -->
+    <section class="section stats reveal" id="stats" aria-label="Nunus Barber by the numbers">
+      <div class="stats__grid">
+        <!-- Featured gold card (the one aggressive accent surface) -->
+        <article class="stat-card stat-card--feature">
+          <span class="stat-card__num">5<span class="stat-card__plus">+</span></span>
+          <span class="stat-card__label">Years of service</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-card__num">1000<span class="stat-card__plus">+</span></span>
+          <span class="stat-card__label">Happy clients</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-card__num">4.8<span class="stat-card__star">★</span></span>
+          <span class="stat-card__label">Google rating</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-card__num">25</span>
+          <span class="stat-card__label">5-star reviews</span>
+        </article>
       </div>
     </section>
 
