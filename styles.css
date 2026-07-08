@@ -373,3 +373,83 @@ p { margin: 0; }
   width: 48px; height: 48px; border-radius: 14px; background: rgba(167,201,74,.18);
   font-size: 1.4rem; margin-bottom: 16px;
 }
+
+/* ===================================================================
+   Scroll-expand hero — media grows & background fades as you scroll
+   =================================================================== */
+.xhero { position: relative; background: var(--forest); }
+.xhero__track { position: relative; height: 220vh; }
+.xhero__pin {
+  position: sticky; top: 0; height: 100vh; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+/* fading background photo */
+.xhero__bg {
+  position: absolute; inset: 0; background: url("images/hero-bg.jpg") center/cover no-repeat;
+  opacity: calc(1 - var(--p, 0)); will-change: opacity;
+}
+.xhero__bgscrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(rgba(15,31,15,.30), rgba(15,31,15,.55));
+  opacity: calc(1 - var(--p, 0));
+}
+/* expanding media box */
+.xhero__media {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 320px; height: 420px; max-width: 100vw; max-height: 100vh;
+  border-radius: 24px; overflow: hidden;
+  background: url("images/hero.jpg") center 32% / cover no-repeat;
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,.65); will-change: width, height;
+}
+.xhero__mediascrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,31,15,.75), rgba(15,31,15,.15));
+  opacity: var(--p, 0);
+}
+/* split drifting title */
+.xhero__titles {
+  position: relative; z-index: 5; display: flex; flex-direction: column;
+  align-items: center; gap: 4px; text-align: center; color: #fff;
+  mix-blend-mode: difference; pointer-events: none;
+  opacity: clamp(0, calc(1 - (var(--p, 0) - 0.72) * 3.6), 1);
+}
+.xhero__word { font-family: var(--serif); font-weight: 500; line-height: 1;
+  font-size: clamp(2.4rem, 8vw, 6rem); }
+.xhero__word--l { transform: translateX(calc(var(--p, 0) * -52vw)); }
+.xhero__word--r { transform: translateX(calc(var(--p, 0) * 52vw)); }
+/* revealed content once expanded */
+.xhero__reveal {
+  position: absolute; inset: 0; z-index: 6; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 0 24px;
+  opacity: 0; transition: opacity .6s ease; pointer-events: none;
+}
+.xhero__reveal.show { opacity: 1; pointer-events: auto; }
+.xhero__reveal > * { max-width: 720px; }
+.xhero__eyebrow { color: var(--lime-soft); letter-spacing: .24em; text-transform: uppercase;
+  font-size: .8rem; font-weight: 600; margin-bottom: 16px; }
+.xhero__title { font-family: var(--serif); font-weight: 500; color: #fff;
+  font-size: clamp(2rem, 4.6vw, 3.4rem); margin-bottom: 16px; }
+.xhero__sub { color: rgba(255,255,255,.9); font-size: clamp(1rem, 1.6vw, 1.2rem);
+  margin-bottom: 26px; }
+.xhero__cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+/* scroll hint */
+.xhero__hint {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 6;
+  display: flex; flex-direction: column; align-items: center; gap: 10px; color: #fff;
+  font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+  opacity: calc(1 - var(--p, 0));
+}
+.xhero__hint i { width: 1px; height: 34px; background: rgba(255,255,255,.75);
+  transform-origin: top; animation: hintline 1.7s ease-in-out infinite; }
+@keyframes hintline { 0%,100% { transform: scaleY(.35); opacity: .4; } 50% { transform: scaleY(1); opacity: 1; } }
+
+/* Static fallback: no-JS or reduced motion — show expanded hero, no scroll trick */
+.xhero.is-static .xhero__track { height: 100vh; }
+.xhero.is-static .xhero__media { width: 100%; height: 100%; border-radius: 0; }
+.xhero.is-static .xhero__mediascrim { opacity: 1; }
+.xhero.is-static .xhero__bg, .xhero.is-static .xhero__bgscrim,
+.xhero.is-static .xhero__titles, .xhero.is-static .xhero__hint { display: none; }
+.xhero.is-static .xhero__reveal { opacity: 1; pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .xhero__hint i { animation: none; }
+}

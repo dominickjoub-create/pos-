@@ -61,21 +61,47 @@
     </div>
   </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="top">
-    <div class="hero__media" aria-hidden="true"></div>
-    <div class="hero__scrim" aria-hidden="true"></div>
-    <div class="hero__content">
-      <p class="hero__eyebrow reveal">Weltevreden Park · Roodepoort</p>
-      <h1 class="hero__title reveal">Beautiful gardens,<br />cared for properly.</h1>
-      <p class="hero__sub reveal">Landscaping, garden services and outdoor spaces — designed,
-        planted and maintained by The Garden Guys.</p>
-      <div class="hero__cta reveal">
-        <a href="#quote" class="btn btn--primary">Get a Free Quote</a>
-        <a href="#work" class="btn btn--ghost">See our work</a>
+  <!-- ===== HERO (scroll-expand) ===== -->
+  <section class="xhero" id="top">
+    <noscript><style>
+      .xhero__track{height:100vh}
+      .xhero__media{width:100%!important;height:100%!important;border-radius:0!important}
+      .xhero__mediascrim{opacity:1!important}
+      .xhero__bg,.xhero__bgscrim,.xhero__titles,.xhero__hint{display:none}
+      .xhero__reveal{opacity:1!important;pointer-events:auto!important}
+    </style></noscript>
+    <div class="xhero__track" id="xheroTrack">
+      <div class="xhero__pin" id="xheroPin">
+        <!-- Background image: fades out as you scroll -->
+        <div class="xhero__bg" aria-hidden="true"></div>
+        <div class="xhero__bgscrim" aria-hidden="true"></div>
+
+        <!-- Expanding media = current hero photo (swap for video/3D later) -->
+        <div class="xhero__media" id="xheroMedia" aria-hidden="true">
+          <div class="xhero__mediascrim"></div>
+        </div>
+
+        <!-- Split title that drifts apart while the media expands -->
+        <div class="xhero__titles" id="xheroTitles">
+          <span class="xhero__word xhero__word--l">The Garden</span>
+          <span class="xhero__word xhero__word--r">Guys</span>
+        </div>
+
+        <!-- Content revealed once fully expanded -->
+        <div class="xhero__reveal" id="xheroReveal">
+          <p class="xhero__eyebrow">Weltevreden Park · Roodepoort</p>
+          <h1 class="xhero__title">Beautiful gardens, cared for properly.</h1>
+          <p class="xhero__sub">Landscaping, garden services and outdoor spaces —
+            designed, planted and maintained by The Garden Guys.</p>
+          <div class="xhero__cta">
+            <a href="#quote" class="btn btn--primary">Get a Free Quote</a>
+            <a href="#work" class="btn btn--ghost">See our work</a>
+          </div>
+        </div>
+
+        <p class="xhero__hint" id="xheroHint"><span>Scroll</span><i></i></p>
       </div>
     </div>
-    <a href="#work" class="hero__scroll" aria-label="Scroll down"><span></span></a>
   </section>
 
   <!-- ===== BEFORE / AFTER ===== -->

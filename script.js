@@ -249,3 +249,54 @@
     });
   }
 })();
+
+/* ===================================================================
+   Scroll-expand hero: media grows and background fades on scroll.
+   Scroll-driven (sticky) — no scroll hijacking. Vanilla adaptation of
+   the ScrollExpandMedia concept.
+   =================================================================== */
+(function () {
+  "use strict";
+  var track = document.getElementById("xheroTrack");
+  if (!track) return;
+  var section = document.querySelector(".xhero");
+  var pin = document.getElementById("xheroPin");
+  var media = document.getElementById("xheroMedia");
+  var reveal = document.getElementById("xheroReveal");
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    section.classList.add("is-static");
+    reveal.classList.add("show");
+    return;
+  }
+
+  var EXPAND_AT = 0.7;   // finish expanding at 70% of the track; hold the rest
+  var ticking = false;
+
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+
+  function update() {
+    ticking = false;
+    var vh = window.innerHeight;
+    var scrollable = track.offsetHeight - vh;
+    if (scrollable <= 0) return;
+    var raw = clamp(-track.getBoundingClientRect().top / scrollable, 0, 1);
+    var p = clamp(raw / EXPAND_AT, 0, 1);
+
+    pin.style.setProperty("--p", p.toFixed(4));
+    media.style.width = (320 + p * (window.innerWidth - 320)) + "px";
+    media.style.height = (420 + p * (vh - 420)) + "px";
+    media.style.borderRadius = (24 * (1 - p)) + "px";
+
+    if (p > 0.92) reveal.classList.add("show");
+    else reveal.classList.remove("show");
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+})();
