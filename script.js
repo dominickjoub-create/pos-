@@ -109,29 +109,137 @@
     setPos(50);
   }
 
-  /* ---------- Quote form -> WhatsApp deep link ---------- */
+  /* ---------- Smart quote form -> WhatsApp deep link ----------
+     Each selected service reveals its own follow-up questions so the
+     enquiry carries exactly what The Garden Guys needs to price the job. */
+  var SIZE = ["Small (up to 200m²)", "Medium (200–600m²)", "Large (600m²+)"];
+
+  var SERVICES = {
+    garden: { label: "Garden service", fields: [
+      { id: "size", label: "How big is your garden?", type: "select", options: SIZE },
+      { id: "freq", label: "How often?", type: "select", options: ["Weekly", "Every two weeks", "Once a month", "Once-off"] }
+    ]},
+    cleanup: { label: "Garden clean-up", fields: [
+      { id: "size", label: "Area to clean up", type: "select", options: SIZE },
+      { id: "state", label: "How overgrown is it?", type: "select", options: ["A little", "Quite overgrown", "Very overgrown"] }
+    ]},
+    lawn: { label: "Lawn care", fields: [
+      { id: "area", label: "Lawn size (approx m²)", type: "number", ph: "e.g. 120" }
+    ]},
+    tree: { label: "Tree felling / trimming", fields: [
+      { id: "count", label: "How many trees?", type: "number", ph: "e.g. 2" },
+      { id: "treesize", label: "Size of the trees", type: "select", options: ["Small (under 3m)", "Medium (3–6m)", "Large (6–10m)", "Very large (10m+)"] },
+      { id: "work", label: "Felling or trimming?", type: "select", options: ["Fell / remove", "Trim only", "Both"] }
+    ]},
+    design: { label: "Landscape design", fields: [
+      { id: "area", label: "Area size (approx m²)", type: "number", ph: "e.g. 300" },
+      { id: "scope", label: "New design or makeover?", type: "select", options: ["Brand new", "Makeover of existing"] }
+    ]},
+    flowerbeds: { label: "Flowerbeds", fields: [
+      { id: "area", label: "Flowerbed area (approx m²)", type: "number", ph: "e.g. 15" },
+      { id: "work", label: "What do you need?", type: "select", options: ["Design & plant new", "Replant existing", "Just planting"] }
+    ]},
+    veg: { label: "Vegetable beds", fields: [
+      { id: "area", label: "Veg bed area (approx m²)", type: "number", ph: "e.g. 10" }
+    ]},
+    irrigation: { label: "Irrigation repairs", fields: [
+      { id: "desc", label: "What's the problem?", type: "text", ph: "e.g. sprinklers not popping up, leak in one zone" }
+    ]},
+    pool: { label: "Pool maintenance", fields: [
+      { id: "poolsize", label: "Pool size", type: "select", options: ["Small", "Medium", "Large"] },
+      { id: "freq", label: "How often?", type: "select", options: ["Once-off clean", "Weekly", "Every two weeks", "Monthly"] }
+    ]},
+    gutters: { label: "Gutter cleaning", fields: [
+      { id: "storeys", label: "How many storeys?", type: "select", options: ["Single storey", "Double storey"] },
+      { id: "length", label: "Approx length of gutters (m)", type: "number", ph: "optional" }
+    ]},
+    pathways: { label: "Steps / pathways", fields: [
+      { id: "area", label: "How many square metres?", type: "number", ph: "e.g. 40" },
+      { id: "material", label: "Preferred material", type: "select", options: ["Not sure", "Paving / brick", "Natural stone", "Gravel", "Concrete"] }
+    ]},
+    composting: { label: "Composting", fields: [
+      { id: "area", label: "Area to compost (approx m²)", type: "number", ph: "e.g. 50" }
+    ]}
+  };
+
   var form = document.getElementById("quoteForm");
   if (form) {
+    var chipInputs = form.querySelectorAll("#serviceChips input");
+    var dynamicWrap = document.getElementById("dynamicFields");
+    var dynamicInner = document.getElementById("dynamicFieldsInner");
+
+    function fieldHTML(key, f) {
+      var uid = "dyn-" + key + "-" + f.id;
+      var control;
+      if (f.type === "select") {
+        var opts = '<option value="">Select…</option>';
+        f.options.forEach(function (o) { opts += '<option value="' + o + '">' + o + "</option>"; });
+        control = '<select id="' + uid + '" data-label="' + f.label + '">' + opts + "</select>";
+      } else {
+        var t = f.type === "number" ? "number" : "text";
+        var ph = f.ph ? ' placeholder="' + f.ph + '"' : "";
+        var min = f.type === "number" ? ' min="0"' : "";
+        control = '<input type="' + t + '" id="' + uid + '" data-label="' + f.label + '"' + ph + min + " />";
+      }
+      return '<label class="field"><span>' + f.label + "</span>" + control + "</label>";
+    }
+
+    function renderDynamic() {
+      var anyChecked = false;
+      var html = "";
+      chipInputs.forEach(function (chip) {
+        if (!chip.checked) return;
+        anyChecked = true;
+        var key = chip.getAttribute("data-key");
+        var svc = SERVICES[key];
+        if (!svc) return;
+        var rows = svc.fields.map(function (f) { return fieldHTML(key, f); }).join("");
+        html += '<div class="svc-detail" data-key="' + key + '">' +
+                  '<h4>' + svc.label + "</h4>" +
+                  '<div class="svc-detail__grid">' + rows + "</div>" +
+                "</div>";
+      });
+      dynamicInner.innerHTML = html;
+      dynamicWrap.hidden = !anyChecked;
+    }
+
+    chipInputs.forEach(function (chip) {
+      chip.addEventListener("change", renderDynamic);
+    });
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      var services = [];
-      form.querySelectorAll("#serviceChips input:checked").forEach(function (c) {
-        services.push(c.value);
+      var lines = ["Hi The Garden Guys! I'd like a quote please.", ""];
+      var chosen = [];
+
+      chipInputs.forEach(function (chip) {
+        if (!chip.checked) return;
+        var key = chip.getAttribute("data-key");
+        var svc = SERVICES[key];
+        if (!svc) return;
+        var details = [];
+        svc.fields.forEach(function (f) {
+          var el = document.getElementById("dyn-" + key + "-" + f.id);
+          var val = el && el.value ? el.value.trim() : "";
+          if (val) details.push(f.label.replace(/\s*\(.*?\)/, "") + ": " + val);
+        });
+        chosen.push("• " + svc.label + (details.length ? " — " + details.join(", ") : ""));
       });
 
       var name = (document.getElementById("qName").value || "").trim();
       var suburb = (document.getElementById("qSuburb").value || "").trim();
       var type = document.getElementById("qType").value;
-      var size = document.getElementById("qSize").value;
       var notes = (document.getElementById("qNotes").value || "").trim();
 
-      var lines = [];
-      lines.push("Hi The Garden Guys! I'd like a quote please.");
+      if (chosen.length) {
+        lines.push("*What I need:*");
+        chosen.forEach(function (c) { lines.push(c); });
+      } else {
+        lines.push("*What I need:* General enquiry");
+      }
       lines.push("");
-      lines.push("*Services:* " + (services.length ? services.join(", ") : "General enquiry"));
       if (type) lines.push("*Property:* " + type);
-      if (size) lines.push("*Yard size:* " + size);
       if (name) lines.push("*Name:* " + name);
       if (suburb) lines.push("*Suburb:* " + suburb);
       if (notes) lines.push("*Notes:* " + notes);

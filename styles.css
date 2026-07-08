@@ -103,7 +103,7 @@ p { margin: 0; }
 }
 .hero__media {
   position: absolute; inset: 0;
-  background: url("images/garden-1.jpg") center/cover no-repeat;
+  background: url("images/hero.jpg") center 32% / cover no-repeat;
   transform: scale(1.05);
   animation: kenburns 22s ease-in-out infinite alternate;
 }
@@ -316,4 +316,60 @@ p { margin: 0; }
   .fab { animation: none; }
   .reveal { transition: none; opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
+}
+
+/* ---------- Smart quote: step badges + dynamic per-service fields ---------- */
+.step-dot {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%; background: var(--green);
+  color: #fff; font-family: var(--sans); font-size: 0.8rem; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+.dynamic { margin: 4px 0 22px; }
+.dynamic__title { font-weight: 600; color: var(--forest); margin-bottom: 14px; }
+.dynamic[hidden] { display: none; }
+.svc-detail {
+  background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--lime);
+  border-radius: 12px; padding: 16px 18px 4px; margin-bottom: 12px;
+  animation: svcin .35s ease;
+}
+@keyframes svcin { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.svc-detail h4 {
+  font-family: var(--sans); font-size: 0.95rem; font-weight: 700; color: var(--green-2);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.svc-detail h4::before { content: "🌿"; font-size: 0.95rem; }
+.svc-detail__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+
+/* ---------- More greenery: botanical accents ---------- */
+.leaf-sprig {
+  --sprig: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%234e8b3a' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M60 118 V26'/%3E%3Cpath d='M60 96c-18 0-30-10-34-28 18-2 30 8 34 28z'/%3E%3Cpath d='M60 96c18 0 30-10 34-28-18-2-30 8-34 28z'/%3E%3Cpath d='M60 64c-15 0-25-9-28-24 15-2 25 7 28 24z'/%3E%3Cpath d='M60 64c15 0 25-9 28-24-15-2-25 7-28 24z'/%3E%3Cpath d='M60 38c-11 0-18-7-20-18 11-1 18 6 20 18z'/%3E%3Cpath d='M60 38c11 0 18-7 20-18-11-1-18 6-20 18z'/%3E%3C/g%3E%3C/svg%3E");
+}
+/* faint leaf watermark in the greener sections */
+.services, .quote, .area { position: relative; overflow: hidden; }
+.services::before, .quote::before {
+  content: ""; position: absolute; width: 320px; height: 320px; pointer-events: none;
+  background: var(--sprig, none); background-size: contain; background-repeat: no-repeat;
+  opacity: 0.05; z-index: 0;
+}
+.services::before { top: -40px; right: -60px; transform: rotate(20deg);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%234e8b3a' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M60 118 V26'/%3E%3Cpath d='M60 96c-18 0-30-10-34-28 18-2 30 8 34 28z'/%3E%3Cpath d='M60 96c18 0 30-10 34-28-18-2-30 8-34 28z'/%3E%3Cpath d='M60 64c-15 0-25-9-28-24 15-2 25 7 28 24z'/%3E%3Cpath d='M60 64c15 0 25-9 28-24-15-2-25 7-28 24z'/%3E%3Cpath d='M60 38c-11 0-18-7-20-18 11-1 18 6 20 18z'/%3E%3Cpath d='M60 38c11 0 18-7 20-18-11-1-18 6-20 18z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+}
+.quote::before { bottom: -50px; left: -50px; transform: rotate(-25deg);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%234e8b3a' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M60 118 V26'/%3E%3Cpath d='M60 96c-18 0-30-10-34-28 18-2 30 8 34 28z'/%3E%3Cpath d='M60 96c18 0 30-10 34-28-18-2-30 8-34 28z'/%3E%3Cpath d='M60 64c-15 0-25-9-28-24 15-2 25 7 28 24z'/%3E%3Cpath d='M60 64c15 0 25-9 28-24-15-2-25 7-28 24z'/%3E%3Cpath d='M60 38c-11 0-18-7-20-18 11-1 18 6 20 18z'/%3E%3Cpath d='M60 38c11 0 18-7 20-18-11-1-18 6-20 18z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+}
+.wrap { position: relative; z-index: 1; }
+/* leaf sprig accent under section headings */
+.section__head h2 { position: relative; }
+.section__head h2::after {
+  content: ""; display: block; width: 46px; height: 22px; margin: 16px auto 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Cg fill='%23a7c94a'%3E%3Cpath d='M60 40c-6-8-16-12-28-12 4 8 14 13 28 12z'/%3E%3Cpath d='M60 40c6-8 16-12 28-12-4 8-14 13-28 12z'/%3E%3C/g%3E%3Ccircle cx='60' cy='30' r='4' fill='%234e8b3a'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+/* greener service cards */
+.card { border-top: 3px solid transparent; }
+.card:hover { border-top-color: var(--lime); }
+.card__mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 14px; background: rgba(167,201,74,.18);
+  font-size: 1.4rem; margin-bottom: 16px;
 }
