@@ -3,552 +3,364 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b0b0c" />
-
-  <!--
-  =====================================================================
-  NUNUS BARBER SHOP — image manifest
-  Drop your photos into the /images folder using EXACTLY these names.
-  Everything shows a styled placeholder until the real file exists.
-  ---------------------------------------------------------------------
-    images/hero.jpg         → big hero background photo   (~1600×1000, landscape)
-    images/interior-1.jpg   → About section photo         (~640×760, portrait)
-    images/cut-1.jpg        → Gallery photo 1             (~600×750, portrait)
-    images/cut-2.jpg        → Gallery photo 2
-    images/cut-3.jpg        → Gallery photo 3
-    images/cut-4.jpg        → Gallery photo 4
-    images/cut-5.jpg        → Gallery photo 5
-    images/interior-2.jpg   → Gallery photo 6 (shop interior)
-    images/og-cover.jpg     → social share image          (1200×630)
-  =====================================================================
-  -->
-
-  <!-- ===================== SEO ===================== -->
-  <title>Nunus Barber Shop — Premium Barbering in Krugersdorp</title>
-  <meta name="description" content="Nunus Barber Shop in Krugersdorp North — old-school craft, modern finish. Skin fades, hot towel shaves & beard shaping by Hemza. 4.8★ from 25 Google reviews. Book on WhatsApp." />
-  <meta name="keywords" content="barber Krugersdorp, barbershop Krugersdorp North, skin fade, hot towel shave, beard trim, Nunus Barber, Hemza barber" />
-  <link rel="canonical" href="https://nunusbarber.co.za/" />
+  <title>The Garden Guys | Landscaping & Garden Services in Weltevreden Park, Roodepoort</title>
+  <meta name="description" content="The Garden Guys — professional landscaping, garden services and outdoor spaces in Weltevreden Park, Roodepoort. Garden maintenance, tree felling, planting, irrigation & pool care. Free quote on WhatsApp." />
+  <meta name="theme-color" content="#1f3d1f" />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="business.business" />
-  <meta property="og:title" content="Nunus Barber Shop — Premium Barbering in Krugersdorp" />
-  <meta property="og:description" content="Old-school craft. Modern finish. Skin fades, hot towel shaves & beard shaping by Hemza. 4.8★ · 25 reviews." />
-  <meta property="og:url" content="https://nunusbarber.co.za/" />
-  <meta property="og:site_name" content="Nunus Barber Shop" />
-  <meta property="og:image" content="images/og-cover.jpg" /><!-- TODO: add images/og-cover.jpg (1200×630) -->
-  <meta property="og:locale" content="en_ZA" />
+  <meta property="og:title" content="The Garden Guys | Landscaping & Garden Services" />
+  <meta property="og:description" content="Beautiful gardens, cared for properly. Serving Weltevreden Park, Roodepoort & surrounds." />
+  <meta property="og:type" content="website" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Nunus Barber Shop — Premium Barbering in Krugersdorp" />
-  <meta name="twitter:description" content="Old-school craft. Modern finish. Book your cut with Hemza on WhatsApp." />
-  <meta name="twitter:image" content="images/og-cover.jpg" /><!-- TODO: add images/og-cover.jpg (1200×630) -->
+  <!-- Favicon: leaf mark -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f3d1f'/%3E%3Cpath d='M16 25c-6-1-9-6-9-12 6 0 12 3 12 10' fill='%23a7c94a'/%3E%3Cpath d='M16 25c5-1 8-5 8-10-5 0-10 2-10 8' fill='%235a9e3f'/%3E%3Crect x='15.2' y='16' width='1.6' height='9' rx='.8' fill='%23244a1f'/%3E%3C/svg%3E" />
 
-  <!-- ===================== FONTS ===================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Oswald:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- ===================== JSON-LD: LocalBusiness / BarberShop ===================== -->
+  <!-- Local business structured data (SEO) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BarberShop",
-    "name": "Nunus Barber Shop",
-    "image": "https://nunusbarber.co.za/images/og-cover.jpg",
-    "url": "https://nunusbarber.co.za/",
-    "telephone": "+27746151005",
-    "priceRange": "R",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Heritage Square, Cecil Knight St, Krugersdorp North",
-      "addressLocality": "Krugersdorp",
-      "addressRegion": "Gauteng",
-      "postalCode": "1739",
-      "addressCountry": "ZA"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "comment": "TODO: confirm exact coordinates. Derived from plus code WQ8H+7W Krugersdorp North.",
-      "latitude": -26.0906,
-      "longitude": 27.7736
-    },
-    "hasMap": "https://www.google.com/maps?q=WQ8H%2B7W+Krugersdorp+North",
-    "openingHoursSpecification": [
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" },
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "15:30" },
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "14:00" }
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "25"
-    },
-    "review": [
-      { "@type": "Review", "author": { "@type": "Person", "name": "Gerrit Olivier" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "Helpful, friendly, skilled staff. Well organised and always clean. Highly recommend." },
-      { "@type": "Review", "author": { "@type": "Person", "name": "Lindie" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "I've taken my son to Hemza since he was 4 — he's 16 now. By far the best barber we've used." },
-      { "@type": "Review", "author": { "@type": "Person", "name": "Ryan Van Leyleyveld" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "Flipping fantastic barber! After struggling elsewhere for months, so glad I found this place." },
-      { "@type": "Review", "author": { "@type": "Person", "name": "Chris Venter" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "Fresh cut — would definitely recommend!" }
-    ]
+    "@type": "LandscapingBusiness",
+    "name": "The Garden Guys",
+    "description": "Landscaping, garden services and outdoor spaces in Weltevreden Park, Roodepoort.",
+    "telephone": "+27683598558",
+    "areaServed": "Weltevreden Park, Roodepoort, Gauteng",
+    "address": { "@type": "PostalAddress", "addressLocality": "Weltevreden Park", "addressRegion": "Gauteng", "addressCountry": "ZA" },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "07:00", "closes": "17:00"
+    }
   }
   </script>
 </head>
-
 <body>
-  <!-- Grain + vignette overlays (decorative) -->
-  <div class="fx-grain" aria-hidden="true"></div>
-  <div class="fx-vignette" aria-hidden="true"></div>
 
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- ===================== NAV ===================== -->
+  <!-- ===== NAV ===== -->
   <header class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#hero" class="nav__brand" aria-label="Nunus Barber Shop — home">
-        <span class="nav__brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 40 40" width="30" height="30" role="img" aria-label="Nunus Barber emblem">
-            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="27" r="3.4"/><circle cx="12" cy="13" r="3.4"/>
-              <path d="M14.6 25 32 10"/><path d="M14.6 15 32 30"/>
-              <circle cx="32" cy="10" r="1"/><circle cx="32" cy="30" r="1"/>
-            </g>
-          </svg>
-        </span>
-        <span class="nav__brand-text">Nunus <em>Barber</em></span>
+      <a href="#top" class="nav__logo" aria-label="The Garden Guys home">
+        <img src="images/logo.png" alt="The Garden Guys" />
       </a>
-
-      <nav class="nav__links" id="navLinks" aria-label="Primary">
-        <a href="#about">About</a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#work">Our Work</a>
         <a href="#services">Services</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#hours">Hours</a>
-        <a href="#visit">Visit</a>
-        <a class="nav__cta" href="https://wa.me/27746151005" target="_blank" rel="noopener">Book Now</a>
+        <a href="#process">How It Works</a>
+        <a href="#area">Areas</a>
+        <a href="#faq">FAQ</a>
+        <a href="#quote" class="nav__cta">Get a Quote</a>
       </nav>
-
-      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main id="main">
-
-    <!-- ===================== HERO ===================== -->
-    <section class="hero" id="hero">
-      <!-- Hero background photo. Parallax is added by JS; static + legible without it. -->
-      <div class="hero__bg" aria-hidden="true">
-        <!-- TODO: drop images/hero.jpg (a wide shop / cut photo). Falls back to dark gradient. -->
-        <img id="heroImg" src="images/hero.jpg" alt="" loading="eager" onerror="this.style.display='none'" />
-        <div class="hero__scrim"></div>
-        <!-- Signature halftone dot motif — gold on black, top-right, clear of the text -->
-        <div class="halftone halftone--hero"></div>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero__media" aria-hidden="true"></div>
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow reveal">Weltevreden Park · Roodepoort</p>
+      <h1 class="hero__title reveal">Beautiful gardens,<br />cared for properly.</h1>
+      <p class="hero__sub reveal">Landscaping, garden services and outdoor spaces — designed,
+        planted and maintained by The Garden Guys.</p>
+      <div class="hero__cta reveal">
+        <a href="#quote" class="btn btn--primary">Get a Free Quote</a>
+        <a href="#work" class="btn btn--ghost">See our work</a>
       </div>
-
-      <div class="hero__content">
-        <p class="hero__eyebrow">Krugersdorp North · Heritage Square</p>
-
-        <!-- Wordmark: two bearded gentlemen flanking cursive "Nunus Barber", razor + scissors -->
-        <div class="wordmark" role="img" aria-label="Nunus Barber Shop logo">
-          <svg class="wordmark__svg" viewBox="0 0 560 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <!-- Left gentleman -->
-              <g transform="translate(70 78)">
-                <path d="M-20 -30 q20 -16 40 0"/>                 <!-- hair -->
-                <path d="M-21 -28 q-3 20 6 34 q15 22 30 0 q9 -14 6 -34"/> <!-- head + beard outline -->
-                <path d="M-14 -14 q14 -8 28 0"/>                  <!-- brow -->
-                <circle cx="-7" cy="-10" r="1.5" fill="currentColor"/>
-                <circle cx="7" cy="-10" r="1.5" fill="currentColor"/>
-                <path d="M-6 0 q6 5 12 0"/>                       <!-- moustache -->
-                <path d="M-10 8 q10 10 20 0"/>                    <!-- beard lines -->
-                <path d="M-8 16 q8 8 16 0"/>
-              </g>
-              <!-- razor + scissors, left of wordmark -->
-              <g transform="translate(150 78)" stroke-width="1.7">
-                <circle cx="-6" cy="8" r="3.2"/><circle cx="-6" cy="-6" r="3.2"/>
-                <path d="M-3 7 L20 -6"/><path d="M-3 -5 L20 8"/>
-                <path d="M-20 -16 L6 -4 q4 2 1 6"/>
-              </g>
-              <!-- razor + scissors, right of wordmark (mirrored) -->
-              <g transform="translate(410 78) scale(-1 1)" stroke-width="1.7">
-                <circle cx="-6" cy="8" r="3.2"/><circle cx="-6" cy="-6" r="3.2"/>
-                <path d="M-3 7 L20 -6"/><path d="M-3 -5 L20 8"/>
-                <path d="M-20 -16 L6 -4 q4 2 1 6"/>
-              </g>
-              <!-- Right gentleman (mirrored) -->
-              <g transform="translate(490 78) scale(-1 1)">
-                <path d="M-20 -30 q20 -16 40 0"/>
-                <path d="M-21 -28 q-3 20 6 34 q15 22 30 0 q9 -14 6 -34"/>
-                <path d="M-14 -14 q14 -8 28 0"/>
-                <circle cx="-7" cy="-10" r="1.5" fill="currentColor"/>
-                <circle cx="7" cy="-10" r="1.5" fill="currentColor"/>
-                <path d="M-6 0 q6 5 12 0"/>
-                <path d="M-10 8 q10 10 20 0"/>
-                <path d="M-8 16 q8 8 16 0"/>
-              </g>
-            </g>
-          </svg>
-          <span class="wordmark__script">Nunus Barber</span>
-        </div>
-
-        <h1 class="hero__title">Old-school craft. <span>Modern finish.</span></h1>
-        <p class="hero__tagline">A premium gentleman's grooming lounge in the heart of Krugersdorp — where Hemza has been sharpening looks for generations of loyal clients.</p>
-
-        <div class="rating-badge" aria-label="Rated 4.8 out of 5 from 25 Google reviews">
-          <span class="rating-badge__stars" aria-hidden="true">★★★★★</span>
-          <strong>4.8</strong>
-          <span class="rating-badge__sub">· 25 Google reviews</span>
-        </div>
-
-        <div class="hero__cta">
-          <a class="btn btn--solid magnetic" href="https://wa.me/27746151005" target="_blank" rel="noopener">
-            <span aria-hidden="true">💬</span> Book on WhatsApp
-          </a>
-          <a class="btn btn--ghost magnetic" href="tel:+27746151005">
-            <span aria-hidden="true">📞</span> Call Now
-          </a>
-        </div>
-      </div>
-
-      <div class="hero__scroll" aria-hidden="true"><span></span>Scroll</div>
-    </section>
-
-    <div class="hairline" aria-hidden="true"></div>
-
-    <!-- ===================== ABOUT ===================== -->
-    <section class="section about reveal" id="about">
-      <div class="section__head">
-        <p class="section__eyebrow">The Shop</p>
-        <h2 class="section__title">A cut above, the old-fashioned way</h2>
-      </div>
-      <div class="about__grid">
-        <div class="about__copy">
-          <p><strong>Nunus Barber Shop</strong> is Krugersdorp's home of precise, unhurried grooming. Set inside Heritage Square, it's a warm room of exposed brick, reclaimed walnut and polished chrome — the kind of place where a haircut is a ritual, not a transaction.</p>
-          <p>At the chair you'll find <strong>Hemza</strong>, a long-trusted barber whose steady hand has shaped generations of the same families. Kids who took their first cut here now bring their own. That's the trust we've built — clean, precise, welcoming, every single time.</p>
-          <ul class="about__points">
-            <li>Generational loyalty &amp; genuine care</li>
-            <li>Meticulous fades, tapers &amp; classic scissor work</li>
-            <li>Spotless, well-organised, relaxed atmosphere</li>
-          </ul>
-        </div>
-        <div class="about__media">
-          <!-- TODO: drop images/interior-1.jpg (a portrait/interior shot). -->
-          <img class="tilt" src="images/interior-1.jpg" alt="Inside Nunus Barber Shop" loading="lazy" width="640" height="760"
-               onerror="this.classList.add('is-missing');this.alt='Photo coming soon';" />
-          <div class="about__stat"><strong>25+</strong><span>years of trust</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== 3D SCISSORS ACCENT BAND (between sections, never behind text) ===================== -->
-    <div class="accent-band" aria-hidden="true">
-      <div class="accent-band__line"></div>
-      <!-- WebGL chrome scissors mounts here; CSS glyph shows as fallback -->
-      <div class="accent3d" id="scissors3d"><span class="accent3d__glyph">✂</span></div>
-      <div class="accent-band__line"></div>
     </div>
+    <a href="#work" class="hero__scroll" aria-label="Scroll down"><span></span></a>
+  </section>
 
-    <!-- ===================== SERVICES (pricing only) ===================== -->
-    <section class="section services reveal" id="services">
-      <div class="section__head">
-        <p class="section__eyebrow">The Menu</p>
-        <h2 class="section__title">Services &amp; pricing</h2>
-        <p class="section__lead">Honest craft, fair prices.</p>
+  <!-- ===== BEFORE / AFTER ===== -->
+  <section class="section work" id="work">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <p class="eyebrow">The transformation</p>
+        <h2>From overgrown to outstanding</h2>
+        <p class="lead">Drag the handle to see the difference we make. Real gardens, real results.</p>
       </div>
 
-      <!-- Phone: 6 cards stacked vertically (NOT a carousel). Desktop: grid. -->
-      <div class="services__list">
-        <!-- TODO: replace every "from R___" with the shop's real price -->
-        <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">✂️</span><h3>Haircut</h3></div>
-          <p>Classic scissor or clipper cut, styled and finished to your taste.</p>
-          <span class="svc-card__price">from R___</span>
-        </article>
-        <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">💈</span><h3>Skin Fade</h3></div>
-          <p>Seamless blend down to the skin — sharp lines, flawless gradient.</p>
-          <span class="svc-card__price">from R___</span>
-        </article>
-        <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🧔</span><h3>Beard Trim &amp; Shape</h3></div>
-          <p>Sculpted, lined and balanced to frame your face.</p>
-          <span class="svc-card__price">from R___</span>
-        </article>
-        <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🪒</span><h3>Hot Towel Shave</h3></div>
-          <p>Traditional straight-razor shave with hot towels and balm.</p>
-          <span class="svc-card__price">from R___</span>
-        </article>
-        <article class="svc-card tilt svc-card--feature">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">⭐</span><h3>Cut + Beard Combo</h3></div>
-          <p>The full reset — haircut paired with a shaped, conditioned beard.</p>
-          <span class="svc-card__price">from R___</span>
-        </article>
-        <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🧒</span><h3>Kids Cut</h3></div>
-          <p>Patient, friendly cuts for the young gentlemen (and future regulars).</p>
-          <span class="svc-card__price">from R___</span>
-        </article>
-      </div>
-    </section>
-
-    <div class="hairline" aria-hidden="true"></div>
-
-    <!-- ===================== GALLERY ===================== -->
-    <section class="section gallery reveal" id="gallery">
-      <div class="section__head">
-        <p class="section__eyebrow">The Work</p>
-        <h2 class="section__title">Gallery</h2>
-        <p class="section__lead">Fresh cuts and the room they're made in.</p>
-      </div>
-
-      <div class="carousel" id="galleryCarousel">
-        <div class="carousel__viewport">
-          <ul class="carousel__track" id="galleryTrack">
-            <!--
-              Real haircut photos live here. To add more, copy one <li> block,
-              bump the number (images/cut-3.jpg, cut-4.jpg …), drop the file in
-              /images, and update the alt text. Only haircut photos go here.
-            -->
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-1.jpg">
-              <img src="images/cut-1.jpg" alt="Curly top with a clean taper fade at Nunus Barber" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
-            </button></li>
-            <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-2.jpg">
-              <img src="images/cut-2.jpg" alt="Textured curls with a blended low fade" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
-            </button></li>
-          </ul>
-        </div>
-        <button class="carousel__arrow carousel__arrow--prev" data-dir="-1" aria-label="Previous image">‹</button>
-        <button class="carousel__arrow carousel__arrow--next" data-dir="1" aria-label="Next image">›</button>
-        <div class="carousel__dots" id="galleryDots" role="tablist" aria-label="Gallery navigation"></div>
-      </div>
-    </section>
-
-    <div class="hairline" aria-hidden="true"></div>
-
-    <!-- ===================== STATS BAND (big architectural metrics) ===================== -->
-    <section class="section stats reveal" id="stats" aria-label="Nunus Barber by the numbers">
-      <div class="stats__grid">
-        <!-- Featured gold card (the one aggressive accent surface) -->
-        <article class="stat-card stat-card--feature">
-          <span class="stat-card__num">5<span class="stat-card__plus">+</span></span>
-          <span class="stat-card__label">Years of service</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-card__num">1000<span class="stat-card__plus">+</span></span>
-          <span class="stat-card__label">Happy clients</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-card__num">4.8<span class="stat-card__star">★</span></span>
-          <span class="stat-card__label">Google rating</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-card__num">25</span>
-          <span class="stat-card__label">5-star reviews</span>
-        </article>
-      </div>
-    </section>
-
-    <div class="hairline" aria-hidden="true"></div>
-
-    <!-- ===================== REVIEWS ===================== -->
-    <section class="section reviews reveal" id="reviews">
-      <div class="section__head">
-        <p class="section__eyebrow">Word of Mouth</p>
-        <h2 class="section__title">What clients say</h2>
-        <div class="rating-badge rating-badge--inline">
-          <span class="rating-badge__stars" aria-hidden="true">★★★★★</span>
-          <strong>4.8</strong><span class="rating-badge__sub">· 25 Google reviews</span>
-        </div>
-      </div>
-
-      <div class="carousel carousel--reviews" id="reviewsCarousel">
-        <div class="carousel__viewport">
-          <ul class="carousel__track" id="reviewsTrack">
-            <li class="review-card">
-              <div class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
-              <blockquote>Helpful, friendly and skilled staff. The shop is well organised and always clean — I highly recommend it.</blockquote>
-              <cite>— Gerrit Olivier</cite>
-            </li>
-            <li class="review-card">
-              <div class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
-              <blockquote>I've taken my son to Hemza since he was four — he's sixteen now. By far the best barber we've ever used.</blockquote>
-              <cite>— Lindie</cite>
-            </li>
-            <li class="review-card">
-              <div class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
-              <blockquote>Flipping fantastic barber! After struggling to find someone good for months, I'm so glad I found this place.</blockquote>
-              <cite>— Ryan Van Leyleyveld</cite>
-            </li>
-            <li class="review-card">
-              <div class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
-              <blockquote>Fresh cut — would definitely recommend!</blockquote>
-              <cite>— Chris Venter</cite>
-            </li>
-          </ul>
-        </div>
-        <button class="carousel__arrow carousel__arrow--prev" data-dir="-1" aria-label="Previous review">‹</button>
-        <button class="carousel__arrow carousel__arrow--next" data-dir="1" aria-label="Next review">›</button>
-        <div class="carousel__dots" id="reviewsDots" role="tablist" aria-label="Review navigation"></div>
-      </div>
-    </section>
-
-    <div class="hairline" aria-hidden="true"></div>
-
-    <!-- ===================== HOURS + LIVE STATUS ===================== -->
-    <section class="section hours reveal" id="hours">
-      <div class="section__head">
-        <p class="section__eyebrow">Opening Times</p>
-        <h2 class="section__title">Hours</h2>
-        <!-- JS fills the live status in 24-hour HH:00 format; static fallback if JS is off -->
-        <p class="live-status" id="liveStatus" aria-live="polite">
-          <span class="live-status__dot"></span>
-          <span id="liveStatusText">Mon–Fri 09:00–18:00 · Sat 08:00–15:30 · Sun 09:00–14:00</span>
-        </p>
-      </div>
-
-      <table class="hours__table" id="hoursTable">
-        <caption class="sr-only">Weekly opening hours for Nunus Barber Shop</caption>
-        <tbody>
-          <tr data-day="1"><th scope="row">Monday</th><td>09:00 – 18:00</td></tr>
-          <tr data-day="2"><th scope="row">Tuesday</th><td>09:00 – 18:00</td></tr>
-          <tr data-day="3"><th scope="row">Wednesday</th><td>09:00 – 18:00</td></tr>
-          <tr data-day="4"><th scope="row">Thursday</th><td>09:00 – 18:00</td></tr>
-          <tr data-day="5"><th scope="row">Friday</th><td>09:00 – 18:00</td></tr>
-          <tr data-day="6"><th scope="row">Saturday</th><td>08:00 – 15:30</td></tr>
-          <tr data-day="0"><th scope="row">Sunday</th><td>09:00 – 14:00</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <div class="hairline" aria-hidden="true"></div>
-
-    <!-- ===================== VISIT / LOCATION + BOOKING ===================== -->
-    <section class="section visit reveal" id="visit">
-      <div class="section__head">
-        <p class="section__eyebrow">Find Us</p>
-        <h2 class="section__title">Location &amp; booking</h2>
-      </div>
-
-      <div class="visit__grid">
-        <!-- Left: map + NAP -->
-        <div class="visit__map-col">
-          <div class="visit__map">
-            <iframe
-              title="Map to Nunus Barber Shop, Heritage Square, Cecil Knight St, Krugersdorp North"
-              src="https://www.google.com/maps?q=WQ8H%2B7W+Krugersdorp+North&output=embed"
-              width="100%" height="320" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="ba reveal" id="beforeAfter">
+        <div class="ba__frame">
+          <img class="ba__img ba__after" src="images/lawn-after.jpg" alt="Garden after The Garden Guys service" draggable="false" />
+          <div class="ba__before-wrap" id="baBefore">
+            <img class="ba__img" src="images/lawn-before.jpg" alt="Garden before service" draggable="false" />
           </div>
-
-          <address class="nap">
-            <p class="nap__name">Nunus Barber Shop</p>
-            <p>Heritage Square, Cecil Knight St,<br/>Krugersdorp North, Krugersdorp, 1739</p>
-            <p>Plus code: <strong>WQ8H+7W</strong> Krugersdorp North</p>
-            <p><a href="tel:+27746151005">074 615 1005</a></p>
-          </address>
-
-          <div class="visit__actions">
-            <a class="btn btn--ghost magnetic" href="https://www.google.com/maps?q=WQ8H%2B7W+Krugersdorp+North" target="_blank" rel="noopener">Directions</a>
-            <a class="btn btn--ghost magnetic" href="tel:+27746151005">Call</a>
-            <a class="btn btn--solid magnetic" href="https://wa.me/27746151005" target="_blank" rel="noopener">WhatsApp</a>
+          <span class="ba__tag ba__tag--before">Before</span>
+          <span class="ba__tag ba__tag--after">After</span>
+          <div class="ba__handle" id="baHandle" role="slider" aria-label="Reveal before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+            <span class="ba__line"></span>
+            <span class="ba__grip"><i></i><i></i></span>
           </div>
         </div>
+        <p class="ba__hint">More before &amp; afters coming soon.</p>
+      </div>
+    </div>
+  </section>
 
-        <!-- Right: booking form -> pre-filled WhatsApp (no backend) -->
-        <div class="visit__form-col">
-          <form class="booking" id="bookingForm" novalidate>
-            <h3 class="booking__title">Request a booking</h3>
-            <p class="booking__sub">Fill this in and we'll open WhatsApp with your details ready to send.</p>
+  <!-- ===== SERVICES ===== -->
+  <section class="section services" id="services">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <p class="eyebrow">What we do</p>
+        <h2>Everything your garden needs</h2>
+        <p class="lead">For homes and offices. One trusted team for the whole outdoor space.</p>
+      </div>
 
-            <label class="field">
-              <span>Name</span>
-              <input type="text" name="name" id="bkName" autocomplete="name" required placeholder="Your name" />
-            </label>
-            <label class="field">
-              <span>Phone</span>
-              <input type="tel" name="phone" id="bkPhone" autocomplete="tel" placeholder="Your number" />
-            </label>
-            <label class="field">
-              <span>Service</span>
-              <select name="service" id="bkService">
-                <option>Haircut</option>
-                <option>Skin Fade</option>
-                <option>Beard Trim &amp; Shape</option>
-                <option>Hot Towel Shave</option>
-                <option>Cut + Beard Combo</option>
-                <option>Kids Cut</option>
-              </select>
-            </label>
-            <label class="field">
-              <span>Preferred time</span>
-              <input type="text" name="time" id="bkTime" placeholder="e.g. Sat morning" />
-            </label>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card__mark" aria-hidden="true">✿</div>
+          <h3>Garden Maintenance</h3>
+          <ul>
+            <li>Garden service — weekly, bi-monthly or monthly</li>
+            <li>Garden clean-ups</li>
+            <li>Lawn care</li>
+            <li>Weed control</li>
+            <li>Refuse removal</li>
+          </ul>
+        </article>
 
-            <button type="submit" class="btn btn--solid btn--block magnetic">Send on WhatsApp</button>
-            <p class="booking__fallback">Prefer to call? <a href="tel:+27746151005">074 615 1005</a></p>
-          </form>
+        <article class="card reveal">
+          <div class="card__mark" aria-hidden="true">❀</div>
+          <h3>Planting &amp; Design</h3>
+          <ul>
+            <li>Landscape design — homes &amp; corporate</li>
+            <li>Flowerbeds — design, create, plant</li>
+            <li>Vegetable beds — design, create, plant</li>
+            <li>Planting</li>
+            <li>Composting</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__mark" aria-hidden="true">❦</div>
+          <h3>Trees &amp; Structures</h3>
+          <ul>
+            <li>Tree felling &amp; trimming</li>
+            <li>Steps &amp; pathways</li>
+            <li>Gutter clearing &amp; cleaning</li>
+            <li>Basic painting &amp; sanding</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__mark" aria-hidden="true">❧</div>
+          <h3>Water &amp; Pool</h3>
+          <ul>
+            <li>Pool maintenance</li>
+            <li>Irrigation repairs</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="section process" id="process">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <p class="eyebrow">Simple &amp; easy</p>
+        <h2>How it works</h2>
+        <p class="lead">No forms to chase, no waiting. Every job is priced on a free consultation.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step__num">1</span>
+          <h3>Tell us what you need</h3>
+          <p>Pick your services and send them straight to us on WhatsApp — it takes a minute.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">2</span>
+          <h3>Free consult &amp; quote</h3>
+          <p>We look at yard size, trees and detail, then give you a clear, fair quote.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step__num">3</span>
+          <h3>We get to work</h3>
+          <p>Reliable, tidy and on schedule — we leave your outdoor space looking its best.</p>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="footer">
-    <div class="footer__inner">
+  <!-- ===== SERVICE AREA ===== -->
+  <section class="section area" id="area">
+    <div class="wrap area__grid">
+      <div class="reveal">
+        <p class="eyebrow">Where we work</p>
+        <h2>Proudly serving the West Rand</h2>
+        <p class="lead">Based in Weltevreden Park, we look after gardens across Roodepoort and
+          the surrounding suburbs. Not sure if we cover you? Just ask.</p>
+        <a href="#quote" class="btn btn--primary">Check your area</a>
+      </div>
+      <ul class="area__list reveal">
+        <li>Weltevreden Park</li>
+        <li>Constantia Kloof</li>
+        <li>Little Falls</li>
+        <li>Roodepoort</li>
+        <li>Wilgeheuwel</li>
+        <li>Radiokop</li>
+        <li>Honeydew</li>
+        <li>Ruimsig</li>
+        <li>Florida</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE FORM ===== -->
+  <section class="section quote" id="quote">
+    <div class="wrap quote__grid">
+      <div class="quote__intro reveal">
+        <p class="eyebrow">Free quote</p>
+        <h2>Get your quote on WhatsApp</h2>
+        <p class="lead">Choose what you need below and we'll build a WhatsApp message for you.
+          Hit send and we'll reply with a quote — quick and easy.</p>
+        <ul class="quote__points">
+          <li>No obligation, no call-out fee to enquire</li>
+          <li>Homes &amp; offices welcome</li>
+          <li>Mon–Sat, 7:00–17:00</li>
+        </ul>
+      </div>
+
+      <form class="quote__form reveal" id="quoteForm" novalidate>
+        <fieldset>
+          <legend>Which services do you need?</legend>
+          <div class="chips" id="serviceChips">
+            <label class="chip"><input type="checkbox" value="Garden service / maintenance" /><span>Garden service</span></label>
+            <label class="chip"><input type="checkbox" value="Garden clean-up" /><span>Clean-up</span></label>
+            <label class="chip"><input type="checkbox" value="Lawn care" /><span>Lawn care</span></label>
+            <label class="chip"><input type="checkbox" value="Tree felling / trimming" /><span>Tree felling</span></label>
+            <label class="chip"><input type="checkbox" value="Landscape design" /><span>Landscape design</span></label>
+            <label class="chip"><input type="checkbox" value="Flowerbeds / planting" /><span>Flowerbeds</span></label>
+            <label class="chip"><input type="checkbox" value="Vegetable beds" /><span>Veg beds</span></label>
+            <label class="chip"><input type="checkbox" value="Irrigation repairs" /><span>Irrigation</span></label>
+            <label class="chip"><input type="checkbox" value="Pool maintenance" /><span>Pool</span></label>
+            <label class="chip"><input type="checkbox" value="Gutter cleaning" /><span>Gutters</span></label>
+            <label class="chip"><input type="checkbox" value="Steps / pathways" /><span>Pathways</span></label>
+            <label class="chip"><input type="checkbox" value="Composting" /><span>Composting</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Your name</span>
+            <input type="text" id="qName" placeholder="e.g. John" autocomplete="name" />
+          </label>
+          <label class="field">
+            <span>Suburb</span>
+            <input type="text" id="qSuburb" placeholder="e.g. Weltevreden Park" />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Property type</span>
+            <select id="qType">
+              <option value="Home">Home</option>
+              <option value="Office / corporate">Office / corporate</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Approx. yard size</span>
+            <select id="qSize">
+              <option value="">Not sure</option>
+              <option value="Small (up to 200m²)">Small (up to 200m²)</option>
+              <option value="Medium (200–600m²)">Medium (200–600m²)</option>
+              <option value="Large (600m²+)">Large (600m²+)</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Anything else? (optional)</span>
+          <textarea id="qNotes" rows="3" placeholder="e.g. two large trees near the wall, overgrown flowerbeds…"></textarea>
+        </label>
+
+        <button type="submit" class="btn btn--whatsapp btn--full">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.86 9.86 0 004.73 1.2h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0012.04 2zm5.8 14.13c-.24.68-1.42 1.32-1.95 1.37-.5.05-1.13.07-1.83-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.82-4.2-4.97-4.4-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.16.07.14.12.31.02.5-.09.2-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.92 1.06.94 1.95 1.24 2.24 1.38.28.14.45.12.61-.07.17-.2.71-.83.9-1.11.19-.29.38-.24.64-.14.26.09 1.67.79 1.96.93.29.14.48.21.55.33.07.11.07.68-.17 1.36z"/></svg>
+          Send my request on WhatsApp
+        </button>
+        <p class="quote__note">Opens WhatsApp with your details ready to send. WhatsApp only · +27&nbsp;68&nbsp;359&nbsp;8558</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section faq" id="faq">
+    <div class="wrap wrap--narrow">
+      <div class="section__head reveal">
+        <p class="eyebrow">Good to know</p>
+        <h2>Frequently asked</h2>
+      </div>
+      <div class="accordion">
+        <details class="reveal">
+          <summary>How does quoting work — why are no prices listed?</summary>
+          <p>Every garden is different. Prices depend on yard size, the number of trees, metres of
+            pathway and how much work is involved, so we quote per job after a quick free consultation.
+            Send us your details on WhatsApp and we'll come back with a fair price.</p>
+        </details>
+        <details class="reveal">
+          <summary>Do you remove the refuse and garden waste?</summary>
+          <p>Yes — refuse removal is part of what we do. We leave your space clean and tidy when we're done.</p>
+        </details>
+        <details class="reveal">
+          <summary>Do you bring your own equipment?</summary>
+          <p>Absolutely. Our team arrives fully equipped for the job, from garden services through to
+            tree felling and irrigation repairs.</p>
+        </details>
+        <details class="reveal">
+          <summary>Which areas do you cover?</summary>
+          <p>We're based in Weltevreden Park and work throughout Roodepoort and the surrounding West Rand
+            suburbs. If you're nearby and not listed, just ask — we most likely cover you.</p>
+        </details>
+        <details class="reveal">
+          <summary>Do you work at offices and businesses too?</summary>
+          <p>Yes. We look after both homes and corporate outdoor spaces, including regular scheduled
+            garden services and landscape design.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contact">
+    <div class="wrap footer__grid">
       <div class="footer__brand">
-        <span class="footer__mark" aria-hidden="true">
-          <svg viewBox="0 0 40 40" width="38" height="38">
-            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="27" r="3.4"/><circle cx="12" cy="13" r="3.4"/>
-              <path d="M14.6 25 32 10"/><path d="M14.6 15 32 30"/>
-            </g>
-          </svg>
-        </span>
-        <span class="footer__wordmark">Nunus Barber</span>
-        <p class="footer__tag">Old-school craft. Modern finish.</p>
+        <img src="images/logo.png" alt="The Garden Guys" />
+        <p>Landscaping · Gardens · Outdoor Spaces</p>
       </div>
-
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <a class="footer__wa" href="https://wa.me/27683598558" target="_blank" rel="noopener">WhatsApp: 068 359 8558</a>
+        <p>WhatsApp only</p>
+      </div>
       <div class="footer__col">
         <h4>Hours</h4>
-        <p>Mon–Fri 09:00–18:00</p>
-        <p>Sat 08:00–15:30</p>
-        <p>Sun 09:00–14:00</p>
+        <p>Monday – Saturday<br />7:00 – 17:00</p>
+        <p>Sunday closed</p>
       </div>
-
       <div class="footer__col">
-        <h4>Visit</h4>
-        <p>Heritage Square, Cecil Knight St,<br/>Krugersdorp North, 1739</p>
-        <p><a href="tel:+27746151005">074 615 1005</a></p>
-      </div>
-
-      <div class="footer__col">
-        <h4>Follow</h4>
-        <!-- TODO: add real social links -->
-        <p><a href="#" rel="noopener">Instagram</a></p>
-        <p><a href="#" rel="noopener">Facebook</a></p>
-        <p><a href="https://www.google.com/maps?q=WQ8H%2B7W+Krugersdorp+North" target="_blank" rel="noopener">Google</a></p>
+        <h4>Area</h4>
+        <p>Weltevreden Park,<br />Roodepoort &amp; surrounds</p>
       </div>
     </div>
-    <p class="footer__copy">© <span id="year">2026</span> Nunus Barber Shop · Krugersdorp North. All rights reserved.</p>
+    <div class="footer__base">
+      <p>© <span id="year"></span> The Garden Guys. All rights reserved.</p>
+    </div>
   </footer>
 
-  <!-- ===================== STICKY MOBILE BAR ===================== -->
-  <div class="mobile-bar" aria-label="Quick contact">
-    <a href="tel:+27746151005"><span aria-hidden="true">📞</span> Call</a>
-    <a href="https://wa.me/27746151005" target="_blank" rel="noopener" class="mobile-bar__wa"><span aria-hidden="true">💬</span> WhatsApp</a>
-  </div>
+  <!-- Floating WhatsApp -->
+  <a class="fab" href="https://wa.me/27683598558" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.86 9.86 0 004.73 1.2h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0012.04 2zm5.8 14.13c-.24.68-1.42 1.32-1.95 1.37-.5.05-1.13.07-1.83-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.82-4.2-4.97-4.4-.14-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.16.07.14.12.31.02.5-.09.2-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.92 1.06.94 1.95 1.24 2.24 1.38.28.14.45.12.61-.07.17-.2.71-.83.9-1.11.19-.29.38-.24.64-.14.26.09 1.67.79 1.96.93.29.14.48.21.55.33.07.11.07.68-.17 1.36z"/></svg>
+  </a>
 
-  <!-- ===================== LIGHTBOX ===================== -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
-    <button class="lightbox__close" id="lightboxClose" aria-label="Close image viewer">×</button>
-    <button class="lightbox__nav lightbox__nav--prev" data-dir="-1" aria-label="Previous image">‹</button>
-    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
-    <button class="lightbox__nav lightbox__nav--next" data-dir="1" aria-label="Next image">›</button>
-  </div>
-
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
 </body>
 </html>
