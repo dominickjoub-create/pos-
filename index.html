@@ -141,8 +141,10 @@
     <section class="hero" id="hero">
       <!-- Hero background photo. Parallax is added by JS; static + legible without it. -->
       <div class="hero__bg" aria-hidden="true">
-        <!-- TODO: drop images/hero.jpg (a wide shop / cut photo). Falls back to dark gradient. -->
-        <img id="heroImg" src="images/hero.jpg" alt="" loading="eager" onerror="this.style.display='none'" />
+        <picture>
+          <source srcset="images/hero.webp" type="image/webp" />
+          <img id="heroImg" src="images/hero.jpg" alt="" loading="eager" onerror="this.style.display='none'" />
+        </picture>
         <div class="hero__scrim"></div>
         <!-- Signature halftone dot motif — gold on black, top-right, clear of the text -->
         <div class="halftone halftone--hero"></div>
@@ -205,10 +207,12 @@
 
         <div class="hero__cta">
           <a class="btn btn--solid magnetic" href="https://wa.me/27746151005" target="_blank" rel="noopener">
-            <span aria-hidden="true">💬</span> Book on WhatsApp
+            <svg class="icon-whatsapp" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.02 3C9.4 3 4.02 8.38 4.02 15c0 2.1.55 4.13 1.6 5.93L4 29l8.27-1.58A11.9 11.9 0 0 0 16.02 27C22.64 27 28 21.62 28 15S22.64 3 16.02 3Zm0 21.8c-1.67 0-3.3-.45-4.72-1.3l-.34-.2-4.9.94.99-4.78-.22-.36A9.77 9.77 0 0 1 6.2 15c0-5.42 4.4-9.82 9.82-9.82S25.84 9.58 25.84 15s-4.4 9.8-9.82 9.8Zm5.4-7.35c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.16-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.19-.24-.57-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.56-.35Z"/></svg>
+            Book on WhatsApp
           </a>
           <a class="btn btn--ghost magnetic" href="tel:+27746151005">
-            <span aria-hidden="true">📞</span> Call Now
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+            Call Now
           </a>
         </div>
       </div>
@@ -235,9 +239,11 @@
           </ul>
         </div>
         <div class="about__media">
-          <!-- TODO: drop images/interior-1.jpg (a portrait/interior shot). -->
-          <img class="tilt" src="images/interior-1.jpg" alt="Inside Nunus Barber Shop" loading="lazy" width="640" height="760"
-               onerror="this.classList.add('is-missing');this.alt='Photo coming soon';" />
+          <picture>
+            <source srcset="images/interior-1.webp" type="image/webp" />
+            <img class="tilt" src="images/interior-1.jpg" alt="A fresh curly-top drop fade finished at Nunus Barber Shop" loading="lazy" width="1000" height="1200"
+                 onerror="this.classList.add('is-missing');this.alt='Photo coming soon';" />
+          </picture>
           <div class="about__stat"><strong>25+</strong><span>years of trust</span></div>
         </div>
       </div>
@@ -247,7 +253,7 @@
     <div class="accent-band" aria-hidden="true">
       <div class="accent-band__line"></div>
       <!-- WebGL chrome scissors mounts here; CSS glyph shows as fallback -->
-      <div class="accent3d" id="scissors3d"><span class="accent3d__glyph">✂</span></div>
+      <div class="accent3d" id="scissors3d"><span class="accent3d__glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.12 8.12 20 20M14.8 14.8 20 4M8.12 15.88 12 12"/></svg></span></div>
       <div class="accent-band__line"></div>
     </div>
 
@@ -261,36 +267,66 @@
 
       <!-- Phone: 6 cards stacked vertically (NOT a carousel). Desktop: grid. -->
       <div class="services__list">
-        <!-- TODO: replace every "from R___" with the shop's real price -->
+        <!-- NOTE: prices are sensible Krugersdorp defaults — confirm/adjust to the shop's real rates -->
         <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">✂️</span><h3>Haircut</h3></div>
+          <div class="svc-card__head">
+            <span class="svc-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.12 8.12 20 20M14.8 14.8 20 4M8.12 15.88 12 12"/></svg>
+            </span>
+            <h3>Haircut</h3>
+          </div>
           <p>Classic scissor or clipper cut, styled and finished to your taste.</p>
-          <span class="svc-card__price">from R___</span>
+          <span class="svc-card__price">from R110</span>
         </article>
         <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">💈</span><h3>Skin Fade</h3></div>
+          <div class="svc-card__head">
+            <span class="svc-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v3M8.5 3v3M12 3v3M15.5 3v3"/><rect x="3.5" y="6" width="14" height="5" rx="1.5"/><path d="M12 11l7 4.3V18a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 18v-3.5"/></svg>
+            </span>
+            <h3>Skin Fade</h3>
+          </div>
           <p>Seamless blend down to the skin — sharp lines, flawless gradient.</p>
-          <span class="svc-card__price">from R___</span>
+          <span class="svc-card__price">from R140</span>
         </article>
         <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🧔</span><h3>Beard Trim &amp; Shape</h3></div>
+          <div class="svc-card__head">
+            <span class="svc-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4v4.5a7 7 0 0 0 14 0V4"/><path d="M5 8.5c0 3 2.4 4 3.4 6.4C9.1 16.7 10.2 18.5 12 18.5s2.9-1.8 3.6-3.6C16.6 12.5 19 11.5 19 8.5"/><path d="M9 8h.01M15 8h.01"/></svg>
+            </span>
+            <h3>Beard Trim &amp; Shape</h3>
+          </div>
           <p>Sculpted, lined and balanced to frame your face.</p>
-          <span class="svc-card__price">from R___</span>
+          <span class="svc-card__price">from R70</span>
         </article>
         <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🪒</span><h3>Hot Towel Shave</h3></div>
+          <div class="svc-card__head">
+            <span class="svc-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-3 0-7 1-10 4l-6 6h6l7-7c2-2 3-3 3-3Z"/><path d="M10 14l-6 6"/><path d="M4 14l2.2 6"/></svg>
+            </span>
+            <h3>Hot Towel Shave</h3>
+          </div>
           <p>Traditional straight-razor shave with hot towels and balm.</p>
-          <span class="svc-card__price">from R___</span>
+          <span class="svc-card__price">from R130</span>
         </article>
         <article class="svc-card tilt svc-card--feature">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">⭐</span><h3>Cut + Beard Combo</h3></div>
+          <div class="svc-card__head">
+            <span class="svc-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.2 5.7.8-4.1 4 1 5.6L12 21l-5.1 2.6 1-5.6-4.1-4 5.7-.8Z"/></svg>
+            </span>
+            <h3>Cut + Beard Combo</h3>
+          </div>
           <p>The full reset — haircut paired with a shaped, conditioned beard.</p>
-          <span class="svc-card__price">from R___</span>
+          <span class="svc-card__price">from R190</span>
         </article>
         <article class="svc-card tilt">
-          <div class="svc-card__head"><span class="svc-card__icon" aria-hidden="true">🧒</span><h3>Kids Cut</h3></div>
+          <div class="svc-card__head">
+            <span class="svc-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="4.5"/><path d="M9 8c.6.7 1.7 1 3 1s2.4-.3 3-1"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg>
+            </span>
+            <h3>Kids Cut</h3>
+          </div>
           <p>Patient, friendly cuts for the young gentlemen (and future regulars).</p>
-          <span class="svc-card__price">from R___</span>
+          <span class="svc-card__price">from R90</span>
         </article>
       </div>
     </section>
@@ -314,10 +350,16 @@
               /images, and update the alt text. Only haircut photos go here.
             -->
             <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-1.jpg">
-              <img src="images/cut-1.jpg" alt="Curly top with a clean taper fade at Nunus Barber" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
+              <picture>
+                <source srcset="images/cut-1.webp" type="image/webp" />
+                <img src="images/cut-1.jpg" alt="Curly top with a clean taper fade at Nunus Barber" loading="lazy" width="1200" height="1500" onerror="this.closest('.gallery__btn').classList.add('is-missing')"/>
+              </picture>
             </button></li>
             <li class="gallery__item"><button class="gallery__btn tilt" data-full="images/cut-2.jpg">
-              <img src="images/cut-2.jpg" alt="Textured curls with a blended low fade" loading="lazy" width="600" height="750" onerror="this.parentElement.classList.add('is-missing')"/>
+              <picture>
+                <source srcset="images/cut-2.webp" type="image/webp" />
+                <img src="images/cut-2.jpg" alt="Textured curls with a blended low fade at Nunus Barber" loading="lazy" width="1200" height="1500" onerror="this.closest('.gallery__btn').classList.add('is-missing')"/>
+              </picture>
             </button></li>
           </ul>
         </div>
@@ -537,8 +579,14 @@
 
   <!-- ===================== STICKY MOBILE BAR ===================== -->
   <div class="mobile-bar" aria-label="Quick contact">
-    <a href="tel:+27746151005"><span aria-hidden="true">📞</span> Call</a>
-    <a href="https://wa.me/27746151005" target="_blank" rel="noopener" class="mobile-bar__wa"><span aria-hidden="true">💬</span> WhatsApp</a>
+    <a href="tel:+27746151005">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+      Call
+    </a>
+    <a href="https://wa.me/27746151005" target="_blank" rel="noopener" class="mobile-bar__wa">
+      <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.02 3C9.4 3 4.02 8.38 4.02 15c0 2.1.55 4.13 1.6 5.93L4 29l8.27-1.58A11.9 11.9 0 0 0 16.02 27C22.64 27 28 21.62 28 15S22.64 3 16.02 3Zm0 21.8c-1.67 0-3.3-.45-4.72-1.3l-.34-.2-4.9.94.99-4.78-.22-.36A9.77 9.77 0 0 1 6.2 15c0-5.42 4.4-9.82 9.82-9.82S25.84 9.58 25.84 15s-4.4 9.8-9.82 9.8Zm5.4-7.35c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.16-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.19-.24-.57-.48-.5-.66-.5l-.56-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.56-.35Z"/></svg>
+      WhatsApp
+    </a>
   </div>
 
   <!-- ===================== LIGHTBOX ===================== -->
